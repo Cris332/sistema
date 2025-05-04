@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1000" height="800" xmlns="http://www.w3.org/2000/svg">
+    <!-- Estilos do diagrama -->
+    <style>
+        .titulo { font: bold 24px Arial; fill: #333; }
+        .subtitulo { font: bold 18px Arial; fill: #444; }
+        .texto { font: 14px Arial; fill: #333; }
+        .texto-bold { font: bold 14px Arial; fill: #333; }
+        .circulo { fill: #4e73df; stroke: #3a56c5; stroke-width: 2; }
+        .retangulo { fill: #36b9cc; stroke: #2a8c9c; stroke-width: 2; rx: 10; ry: 10; }
+        .hexagono { fill: #1cc88a; stroke: #169a6c; stroke-width: 2; }
+        .triangulo { fill: #f6c23e; stroke: #dda20a; stroke-width: 2; }
+        .diamante { fill: #e74a3b; stroke: #c5392c; stroke-width: 2; }
+        .linha { stroke: #858796; stroke-width: 2; marker-end: url(#arrowhead); }
+        .linha-tracejada { stroke: #858796; stroke-width: 2; stroke-dasharray: 5,5; marker-end: url(#arrowhead); }
+    </style>
+    
+    <!-- Definição da seta para as linhas -->
+    <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#858796" />
+        </marker>
+    </defs>
+    
+    <!-- Título do diagrama -->
+    <text x="500" y="40" text-anchor="middle" class="titulo">Fluxo de Trabalho do Sistema</text>
+    <text x="500" y="70" text-anchor="middle" class="subtitulo">Sistema de Controle de Serviços Técnicos</text>
+    
+    <!-- Início do Fluxo (círculo) -->
+    <circle cx="100" cy="150" r="40" class="circulo"/>
+    <text x="100" y="155" text-anchor="middle" fill="white" class="texto-bold">INÍCIO</text>
+    
+    <!-- Etapa 1: Login (retângulo) -->
+    <rect x="200" y="120" width="150" height="60" class="retangulo"/>
+    <text x="275" y="155" text-anchor="middle" fill="white" class="texto-bold">LOGIN</text>
+    <text x="275" y="175" text-anchor="middle" fill="white" class="texto">Autenticação</text>
+    <line x1="140" y1="150" x2="200" y2="150" class="linha"/>
+    
+    <!-- Decisão: Nível de Acesso (diamante) -->
+    <polygon points="400,150 450,100 500,150 450,200" class="diamante"/>
+    <text x="450" y="155" text-anchor="middle" fill="white" class="texto-bold">NÍVEL DE</text>
+    <text x="450" y="175" text-anchor="middle" fill="white" class="texto-bold">ACESSO</text>
+    <line x1="350" y1="150" x2="400" y2="150" class="linha"/>
+    
+    <!-- Ramificação para diferentes perfis -->
+    <!-- Admin (hexágono) -->
+    <polygon points="450,250 500,275 550,250 550,200 500,175 450,200" class="hexagono"/>
+    <text x="500" y="235" text-anchor="middle" fill="white" class="texto-bold">ADMIN</text>
+    <line x1="450" y1="175" x2="450" y2="200" class="linha-tracejada"/>
+    
+    <!-- Técnico (hexágono) -->
+    <polygon points="600,150 650,175 700,150 700,100 650,75 600,100" class="hexagono"/>
+    <text x="650" y="135" text-anchor="middle" fill="white" class="texto-bold">TÉCNICO</text>
+    <line x1="500" y1="150" x2="600" y2="150" class="linha-tracejada"/>
+    
+    <!-- Atendente (hexágono) -->
+    <polygon points="450,50 500,25 550,50 550,100 500,125 450,100" class="hexagono"/>
+    <text x="500" y="75" text-anchor="middle" fill="white" class="texto-bold">ATENDENTE</text>
+    <line x1="450" y1="125" x2="450" y2="100" class="linha-tracejada"/>
+    
+    <!-- Funcionalidades Admin -->
+    <rect x="450" y="300" width="150" height="50" class="retangulo" fill="#1cc88a"/>
+    <text x="525" y="330" text-anchor="middle" fill="white" class="texto">Gerenciar Usuários</text>
+    <line x1="500" y1="250" x2="500" y2="300" class="linha"/>
+    
+    <rect x="450" y="370" width="150" height="50" class="retangulo" fill="#1cc88a"/>
+    <text x="525" y="400" text-anchor="middle" fill="white" class="texto">Configurar Sistema</text>
+    <line x1="525" y1="350" x2="525" y2="370" class="linha"/>
+    
+    <!-- Funcionalidades Técnico -->
+    <rect x="650" y="200" width="150" height="50" class="retangulo" fill="#f6c23e"/>
+    <text x="725" y="230" text-anchor="middle" fill="white" class="texto">Atender OS</text>
+    <line x1="650" y1="150" x2="650" y2="200" class="linha"/>
+    
+    <rect x="650" y="270" width="150" height="50" class="retangulo" fill="#f6c23e"/>
+    <text x="725" y="300" text-anchor="middle" fill="white" class="texto">Atualizar Status</text>
+    <line x1="725" y1="250" x2="725" y2="270" class="linha"/>
+    
+    <!-- Funcionalidades Atendente -->
+    <rect x="250" y="50" width="150" height="50" class="retangulo" fill="#e74a3b"/>
+    <text x="325" y="80" text-anchor="middle" fill="white" class="texto">Cadastrar Cliente</text>
+    <line x1="450" y1="75" x2="400" y2="75" class="linha"/>
+    
+    <rect x="250" y="0" width="150" height="50" class="retangulo" fill="#e74a3b"/>
+    <text x="325" y="30" text-anchor="middle" fill="white" class="texto">Criar OS</text>
+    <line x1="325" y1="50" x2="325" y2="0" class="linha"/>
+    
+    <!-- Convergência do Fluxo (triângulo) -->
+    <polygon points="800,350 750,400 850,400" class="triangulo"/>
+    <text x="800" y="385" text-anchor="middle" fill="white" class="texto-bold">CONVERGÊNCIA</text>
+    
+    <!-- Linhas de convergência -->
+    <line x1="600" y1="400" x2="750" y2="400" class="linha"/>
+    <line x1="800" y1="320" x2="800" y2="350" class="linha"/>
+    <line x1="325" y1="0" x2="900" y2="0" class="linha-tracejada"/>
+    <line x1="900" y1="0" x2="900" y2="375" class="linha-tracejada"/>
+    <line x1="900" y1="375" x2="850" y2="375" class="linha-tracejada"/>
+    
+    <!-- Etapa Final: Relatórios (retângulo grande) -->
+    <rect x="700" y="450" width="200" height="100" class="retangulo" fill="#4e73df"/>
+    <text x="800" y="480" text-anchor="middle" fill="white" class="texto-bold">RELATÓRIOS</text>
+    <text x="800" y="505" text-anchor="middle" fill="white" class="texto">Geração de Relatórios</text>
+    <text x="800" y="525" text-anchor="middle" fill="white" class="texto">Análise de Dados</text>
+    <line x1="800" y1="400" x2="800" y2="450" class="linha"/>
+    
+    <!-- Fim do Fluxo (círculo) -->
+    <circle cx="800" cy="600" r="40" class="circulo"/>
+    <text x="800" y="605" text-anchor="middle" fill="white" class="texto-bold">FIM</text>
+    <line x1="800" y1="550" x2="800" y2="560" class="linha"/>
+    
+    <!-- Legenda -->
+    <rect x="50" y="650" width="900" height="120" fill="#f8f9fc" stroke="#dddfeb" stroke-width="1" rx="5" ry="5"/>
+    <text x="500" y="675" text-anchor="middle" class="subtitulo">Legenda</text>
+    
+    <!-- Legenda: Formas -->
+    <circle cx="100" cy="700" r="15" class="circulo"/>
+    <text x="130" y="705" class="texto">Início/Fim</text>
+    
+    <rect x="180" y="685" width="30" height="30" class="retangulo"/>
+    <text x="250" y="705" class="texto">Processo/Ação</text>
+    
+    <polygon points="300,700 315,685 330,700 330,715 315,730 300,715" class="hexagono"/>
+    <text x="370" y="705" class="texto">Perfil de Usuário</text>
+    
+    <polygon points="450,700 435,715 450,730 465,715" class="diamante"/>
+    <text x="500" y="705" class="texto">Decisão</text>
+    
+    <polygon points="550,700 535,725 565,725" class="triangulo"/>
+    <text x="600" y="705" class="texto">Convergência</text>
+    
+    <!-- Legenda: Linhas -->
+    <line x1="650" y1="700" x2="680" y2="700" class="linha"/>
+    <text x="720" y="705" class="texto">Fluxo Principal</text>
+    
+    <line x1="750" y1="730" x2="780" y2="730" class="linha-tracejada"/>
+    <text x="830" y="735" class="texto">Fluxo Secundário</text>
+</svg>

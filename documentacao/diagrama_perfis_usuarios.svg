@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1000" height="800" xmlns="http://www.w3.org/2000/svg">
+    <!-- Estilos do diagrama -->
+    <style>
+        .titulo { font: bold 24px Arial; fill: #333; }
+        .subtitulo { font: bold 18px Arial; fill: #444; }
+        .texto { font: 14px Arial; fill: #333; }
+        .texto-bold { font: bold 14px Arial; fill: #333; }
+        .circulo-perfil { fill: #4e73df; stroke: #3a56c5; stroke-width: 2; }
+        .retangulo-funcao { fill: #36b9cc; stroke: #2a8c9c; stroke-width: 2; rx: 10; ry: 10; }
+        .linha { stroke: #858796; stroke-width: 2; }
+        .linha-tracejada { stroke: #858796; stroke-width: 2; stroke-dasharray: 5,5; }
+    </style>
+    
+    <!-- Título do diagrama -->
+    <text x="500" y="40" text-anchor="middle" class="titulo">Perfis de Usuários e Funcionalidades</text>
+    <text x="500" y="70" text-anchor="middle" class="subtitulo">Sistema de Controle de Serviços Técnicos</text>
+    
+    <!-- Administrador -->
+    <circle cx="250" cy="200" r="70" class="circulo-perfil"/>
+    <text x="250" y="190" text-anchor="middle" fill="white" font-size="20" font-weight="bold">ADMIN</text>
+    <text x="250" y="215" text-anchor="middle" fill="white" font-size="12">Acesso Total</text>
+    
+    <!-- Funcionalidades do Administrador -->
+    <rect x="100" y="300" width="150" height="40" class="retangulo-funcao" opacity="0.9" fill="#1cc88a"/>
+    <text x="175" y="325" text-anchor="middle" fill="white" class="texto">Gerenciar Usuários</text>
+    <line x1="220" y1="270" x2="175" y2="300" class="linha"/>
+    
+    <rect x="100" y="350" width="150" height="40" class="retangulo-funcao" opacity="0.9" fill="#1cc88a"/>
+    <text x="175" y="375" text-anchor="middle" fill="white" class="texto">Definir Níveis de Acesso</text>
+    <line x1="175" y1="340" x2="175" y2="350" class="linha-tracejada"/>
+    
+    <rect x="100" y="400" width="150" height="40" class="retangulo-funcao" opacity="0.9" fill="#1cc88a"/>
+    <text x="175" y="425" text-anchor="middle" fill="white" class="texto">Configurar Sistema</text>
+    <line x1="175" y1="390" x2="175" y2="400" class="linha-tracejada"/>
+    
+    <rect x="100" y="450" width="150" height="40" class="retangulo-funcao" opacity="0.9" fill="#1cc88a"/>
+    <text x="175" y="475" text-anchor="middle" fill="white" class="texto">Visualizar Relatórios</text>
+    <line x1="175" y1="440" x2="175" y2="450" class="linha-tracejada"/>
+    
+    <rect x="100" y="500" width="150" height="40" class="retangulo-funcao" opacity="0.9" fill="#1cc88a"/>
+    <text x="175" y="525" text-anchor="middle" fill="white" class="texto">Backup do Sistema</text>
+    <line x1="175" y1="490" x2="175" y2="500" class="linha-tracejada"/>
+    
+    <!-- Técnico -->
+    <circle cx="500" cy="200" r="70" class="circulo-perfil"/>
+    <text x="500" y="190" text-anchor="middle" fill="white" font-size="20" font-weight="bold">TÉCNICO</text>
+    <text x="500" y="215" text-anchor="middle" fill="white" font-size="12">Acesso Operacional</text>
+    
+    <!-- Funcionalidades do Técnico -->
+    <rect x="350" y="300" width="150" height="40" class="retangulo-funcao" opacity="0.9" fill="#f6c23e"/>
+    <text x="425" y="325" text-anchor="middle" fill="white" class="texto">Atender OS</text>
+    <line x1="470" y1="270" x2="425" y2="300" class="linha"/>
+    
+    <rect x="350" y="350" width="150" height="40" class="retangulo-funcao" opacity="0.9" fill="#f6c23e"/>
+    <text x="425" y="375" text-anchor="middle" fill="white" class="texto">Registrar Serviços</text>
+    <line x1="425" y1="340" x2="425" y2="350" class="linha-tracejada"/>
+    
+    <rect x="350" y="400" width="150" height="40" class="retangulo-funcao" opacity="0.9" fill="#f6c23e"/>
+    <text x="425" y="425" text-anchor="middle" fill="white" class="texto">Atualizar Status OS</text>
+    <line x1="425" y1="390" x2="425" y2="400" class="linha-tracejada"/>
+    
+    <rect x="350" y="450" width="150" height="40" class="retangulo-funcao" opacity="0.9" fill="#f6c23e"/>
+    <text x="425" y="475" text-anchor="middle" fill="white" class="texto">Consultar Histórico</text>
+    <line x1="425" y1="440" x2="425" y2="450" class="linha-tracejada"/>
+    
+    <!-- Atendente -->
+    <circle cx="750" cy="200" r="70" class="circulo-perfil"/>
+    <text x="750" y="190" text-anchor="middle" fill="white" font-size="20" font-weight="bold">ATENDENTE</text>
+    <text x="750" y="215" text-anchor="middle" fill="white" font-size="12">Acesso Básico</text>
+    
+    <!-- Funcionalidades do Atendente -->
+    <rect x="600" y="300" width="150" height="40" class="retangulo-funcao" opacity="0.9" fill="#e74a3b"/>
+    <text x="675" y="325" text-anchor="middle" fill="white" class="texto">Cadastrar Clientes</text>
+    <line x1="720" y1="270" x2="675" y2="300" class="linha"/>
+    
+    <rect x="600" y="350" width="150" height="40" class="retangulo-funcao" opacity="0.9" fill="#e74a3b"/>
+    <text x="675" y="375" text-anchor="middle" fill="white" class="texto">Criar OS</text>
+    <line x1="675" y1="340" x2="675" y2="350" class="linha-tracejada"/>
+    
+    <rect x="600" y="400" width="150" height="40" class="retangulo-funcao" opacity="0.9" fill="#e74a3b"/>
+    <text x="675" y="425" text-anchor="middle" fill="white" class="texto">Consultar OS</text>
+    <line x1="675" y1="390" x2="675" y2="400" class="linha-tracejada"/>
+    
+    <rect x="600" y="450" width="150" height="40" class="retangulo-funcao" opacity="0.9" fill="#e74a3b"/>
+    <text x="675" y="475" text-anchor="middle" fill="white" class="texto">Imprimir OS</text>
+    <line x1="675" y1="440" x2="675" y2="450" class="linha-tracejada"/>
+    
+    <!-- Cliente (Usuário Externo) -->
+    <circle cx="500" cy="600" r="70" class="circulo-perfil" fill="#858796"/>
+    <text x="500" y="590" text-anchor="middle" fill="white" font-size="20" font-weight="bold">CLIENTE</text>
+    <text x="500" y="615" text-anchor="middle" fill="white" font-size="12">Acesso Externo</text>
+    
+    <!-- Funcionalidades do Cliente -->
+    <rect x="300" y="600" width="150" height="40" class="retangulo-funcao" opacity="0.9" fill="#858796"/>
+    <text x="375" y="625" text-anchor="middle" fill="white" class="texto">Consultar OS</text>
+    <line x1="430" y1="600" x2="400" y2="600" class="linha"/>
+    
+    <rect x="550" y="600" width="150" height="40" class="retangulo-funcao" opacity="0.9" fill="#858796"/>
+    <text x="625" y="625" text-anchor="middle" fill="white" class="texto">Aprovar Serviços</text>
+    <line x1="570" y1="600" x2="600" y2="600" class="linha"/>
+    
+    <!-- Conexões entre perfis -->
+    <line x1="320" y1="200" x2="430" y2="200" class="linha-tracejada" stroke="#4e73df"/>
+    <line x1="570" y1="200" x2="680" y2="200" class="linha-tracejada" stroke="#4e73df"/>
+    <line x1="500" y1="270" x2="500" y2="530" class="linha-tracejada" stroke="#4e73df"/>
+    
+    <!-- Legenda -->
+    <rect x="50" y="700" width="900" height="80" fill="#f8f9fc" stroke="#dddfeb" stroke-width="1" rx="5" ry="5"/>
+    <text x="500" y="725" text-anchor="middle" class="subtitulo">Legenda</text>
+    
+    <!-- Legenda: Círculos -->
+    <circle cx="100" cy="750" r="15" class="circulo-perfil"/>
+    <text x="130" y="755" class="texto">Perfil de Usuário</text>
+    
+    <!-- Legenda: Retângulos -->
+    <rect x="200" y="735" width="30" height="30" class="retangulo-funcao" fill="#1cc88a"/>
+    <text x="280" y="755" class="texto">Funções Admin</text>
+    
+    <rect x="350" y="735" width="30" height="30" class="retangulo-funcao" fill="#f6c23e"/>
+    <text x="430" y="755" class="texto">Funções Técnico</text>
+    
+    <rect x="500" y="735" width="30" height="30" class="retangulo-funcao" fill="#e74a3b"/>
+    <text x="580" y="755" class="texto">Funções Atendente</text>
+    
+    <rect x="650" y="735" width="30" height="30" class="retangulo-funcao" fill="#858796"/>
+    <text x="730" y="755" class="texto">Funções Cliente</text>
+    
+    <!-- Legenda: Linhas -->
+    <line x1="800" y1="740" x2="830" y2="740" class="linha"/>
+    <text x="870" y="745" class="texto">Conexão Direta</text>
+    
+    <line x1="800" y1="765" x2="830" y2="765" class="linha-tracejada"/>
+    <text x="880" y="770" class="texto">Conexão Secundária</text>
+</svg>

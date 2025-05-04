@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requisitos do Sistema de Controle de Serviços Técnicos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 30px;
+            border-left: 4px solid #3498db;
+            padding-left: 10px;
+        }
+        h3 {
+            color: #16a085;
+            margin-top: 20px;
+        }
+        .requisito {
+            margin-bottom: 10px;
+            padding-left: 20px;
+        }
+        .requisito-id {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .requisito-desc {
+            margin-left: 10px;
+        }
+        .rf-section {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .rnf-section {
+            background-color: #f9ebf2;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .diagrama-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .diagrama-container img {
+            max-width: 100%;
+            height: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <h1>Requisitos do Sistema de Controle de Serviços Técnicos</h1>
+    
+    <div class="diagrama-container">
+        <object data="diagrama_requisitos.svg" type="image/svg+xml" width="1000" height="1400">
+            <img src="diagrama_requisitos.svg" alt="Diagrama de Requisitos" width="1000">
+        </object>
+    </div>
+    
+    <h2>Requisitos Funcionais</h2>
+    <p>Os requisitos funcionais descrevem as funcionalidades que o sistema deve oferecer aos usuários.</p>
+    
+    <div class="rf-section">
+        <h3>RF1: Gestão de Usuários</h3>
+        <div class="requisito">
+            <span class="requisito-id">RF1.1:</span>
+            <span class="requisito-desc">Cadastrar usuários com nome, email e senha</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF1.2:</span>
+            <span class="requisito-desc">Definir nível de acesso (admin ou usuário)</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF1.3:</span>
+            <span class="requisito-desc">Autenticar usuários no sistema</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF1.4:</span>
+            <span class="requisito-desc">Gerenciar permissões baseadas no nível de acesso</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF1.5:</span>
+            <span class="requisito-desc">Registrar data de cadastro automaticamente</span>
+        </div>
+    </div>
+    
+    <div class="rf-section">
+        <h3>RF2: Gestão de Cargos</h3>
+        <div class="requisito">
+            <span class="requisito-id">RF2.1:</span>
+            <span class="requisito-desc">Cadastrar cargos com nome e descrição</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF2.2:</span>
+            <span class="requisito-desc">Consultar cargos disponíveis</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF2.3:</span>
+            <span class="requisito-desc">Atualizar informações de cargos</span>
+        </div>
+    </div>
+    
+    <div class="rf-section">
+        <h3>RF3: Gestão de Colaboradores</h3>
+        <div class="requisito">
+            <span class="requisito-id">RF3.1:</span>
+            <span class="requisito-desc">Cadastrar colaboradores com dados pessoais</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF3.2:</span>
+            <span class="requisito-desc">Associar colaborador a um cargo</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF3.3:</span>
+            <span class="requisito-desc">Vincular colaborador a um usuário do sistema</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF3.4:</span>
+            <span class="requisito-desc">Consultar colaboradores cadastrados</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF3.5:</span>
+            <span class="requisito-desc">Atualizar informações de colaboradores</span>
+        </div>
+    </div>
+    
+    <div class="rf-section">
+        <h3>RF4: Gestão de Clientes</h3>
+        <div class="requisito">
+            <span class="requisito-id">RF4.1:</span>
+            <span class="requisito-desc">Cadastrar clientes (pessoa física ou jurídica)</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF4.2:</span>
+            <span class="requisito-desc">Registrar dados de contato (telefone, email)</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF4.3:</span>
+            <span class="requisito-desc">Armazenar endereço do cliente</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF4.4:</span>
+            <span class="requisito-desc">Consultar clientes cadastrados</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF4.5:</span>
+            <span class="requisito-desc">Atualizar informações de clientes</span>
+        </div>
+    </div>
+    
+    <div class="rf-section">
+        <h3>RF5: Gestão de Ordens de Serviço</h3>
+        <div class="requisito">
+            <span class="requisito-id">RF5.1:</span>
+            <span class="requisito-desc">Criar nova ordem de serviço</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF5.2:</span>
+            <span class="requisito-desc">Gerar número de OS automaticamente</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF5.3:</span>
+            <span class="requisito-desc">Registrar equipamento e defeito relatado</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF5.4:</span>
+            <span class="requisito-desc">Vincular OS a um cliente</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF5.5:</span>
+            <span class="requisito-desc">Atribuir técnico responsável</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF5.6:</span>
+            <span class="requisito-desc">Registrar serviço realizado</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF5.7:</span>
+            <span class="requisito-desc">Calcular valor total do serviço</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF5.8:</span>
+            <span class="requisito-desc">Atualizar status da OS (aberta, em andamento, concluída, cancelada)</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF5.9:</span>
+            <span class="requisito-desc">Consultar ordens de serviço</span>
+        </div>
+    </div>
+    
+    <div class="rf-section">
+        <h3>RF6: Relatórios</h3>
+        <div class="requisito">
+            <span class="requisito-id">RF6.1:</span>
+            <span class="requisito-desc">Gerar relatório de ordens de serviço</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF6.2:</span>
+            <span class="requisito-desc">Gerar relatório de clientes</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF6.3:</span>
+            <span class="requisito-desc">Gerar relatório de colaboradores</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF6.4:</span>
+            <span class="requisito-desc">Gerar relatório de cargos</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF6.5:</span>
+            <span class="requisito-desc">Gerar relatório de usuários</span>
+        </div>
+    </div>
+    
+    <div class="rf-section">
+        <h3>RF7: Impressão</h3>
+        <div class="requisito">
+            <span class="requisito-id">RF7.1:</span>
+            <span class="requisito-desc">Imprimir ordem de serviço</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF7.2:</span>
+            <span class="requisito-desc">Imprimir relatórios gerados</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RF7.3:</span>
+            <span class="requisito-desc">Visualizar prévia de impressão</span>
+        </div>
+    </div>
+    
+    <h2>Requisitos Não Funcionais</h2>
+    <p>Os requisitos não funcionais descrevem as características e restrições do sistema que não estão diretamente relacionadas às funcionalidades.</p>
+    
+    <div class="rnf-section">
+        <h3>RNF1: Segurança</h3>
+        <div class="requisito">
+            <span class="requisito-id">RNF1.1:</span>
+            <span class="requisito-desc">Armazenar senhas criptografadas</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RNF1.2:</span>
+            <span class="requisito-desc">Controle de acesso baseado em níveis de usuário</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RNF1.3:</span>
+            <span class="requisito-desc">Validação de dados nos formulários</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RNF1.4:</span>
+            <span class="requisito-desc">Proteção contra injeção SQL</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RNF1.5:</span>
+            <span class="requisito-desc">Sanitização de dados de entrada</span>
+        </div>
+    </div>
+    
+    <div class="rnf-section">
+        <h3>RNF2: Usabilidade</h3>
+        <div class="requisito">
+            <span class="requisito-id">RNF2.1:</span>
+            <span class="requisito-desc">Interface intuitiva e responsiva</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RNF2.2:</span>
+            <span class="requisito-desc">Feedback visual para ações do usuário</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RNF2.3:</span>
+            <span class="requisito-desc">Mensagens de erro claras e informativas</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RNF2.4:</span>
+            <span class="requisito-desc">Atalhos para funções frequentes</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RNF2.5:</span>
+            <span class="requisito-desc">Layout consistente em todas as telas</span>
+        </div>
+    </div>
+    
+    <div class="rnf-section">
+        <h3>RNF3: Desempenho</h3>
+        <div class="requisito">
+            <span class="requisito-id">RNF3.1:</span>
+            <span class="requisito-desc">Tempo de resposta rápido para consultas</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RNF3.2:</span>
+            <span class="requisito-desc">Otimização de consultas ao banco de dados</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RNF3.3:</span>
+            <span class="requisito-desc">Carregamento eficiente de páginas</span>
+        </div>
+    </div>
+    
+    <div class="rnf-section">
+        <h3>RNF4: Confiabilidade</h3>
+        <div class="requisito">
+            <span class="requisito-id">RNF4.1:</span>
+            <span class="requisito-desc">Tratamento adequado de exceções</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RNF4.2:</span>
+            <span class="requisito-desc">Backup automático do banco de dados</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RNF4.3:</span>
+            <span class="requisito-desc">Recuperação de falhas</span>
+        </div>
+    </div>
+    
+    <div class="rnf-section">
+        <h3>RNF5: Manutenibilidade</h3>
+        <div class="requisito">
+            <span class="requisito-id">RNF5.1:</span>
+            <span class="requisito-desc">Código organizado e documentado</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RNF5.2:</span>
+            <span class="requisito-desc">Arquitetura modular (classes separadas)</span>
+        </div>
+        <div class="requisito">
+            <span class="requisito-id">RNF5.3:</span>
+            <span class="requisito-desc">Padrões de codificação consistentes</span>
+        </div>
+    </div>
+    
+    <div class="rnf-section">
+        <h3>RNF6: Compatibilidade</h3>
+        <div class="requisito">
+            <span class="requisito-id">RNF6.1:</span>
+            <span class="requisito-desc">Compatibilidade com navegadores modernos</span>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>Documentação de Requisitos - Sistema de Controle de Serviços Técnicos</p>
+        <p>Tech Solutions &copy; 2023</p>
+    </div>
+</body>
+</html>
