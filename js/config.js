@@ -124,6 +124,12 @@ const configuracoesDefault = {
         automatico: false,
         nuvem: false,
         horario: "23:00"
+    },
+    entregas: {
+        velocidadeSimulacao: 2, // Velocidade da simulação (1-5)
+        mostrarRota: true,      // Mostrar linha da rota no mapa
+        mostrarLog: true,       // Mostrar histórico de entregas
+        centralPadrao: [-23.550520, -46.633308] // Coordenadas da central (São Paulo)
     }
 };
 
@@ -158,6 +164,10 @@ function carregarConfiguracoesSistema() {
         
         if (configSalvas.backup) {
             config.backup = {...config.backup, ...configSalvas.backup};
+        }
+        
+        if (configSalvas.entregas) {
+            config.entregas = {...config.entregas, ...configSalvas.entregas};
         }
     }
     
@@ -504,7 +514,8 @@ function salvarConfiguracoes() {
             automatico: document.getElementById('backup-automatico').checked,
             nuvem: document.getElementById('backup-nuvem').checked,
             horario: document.getElementById('horario-backup').value
-        }
+        },
+        entregas: carregarConfiguracoesSistema().entregas // Manter as configurações de entregas existentes
     };
     
     // Salvar no localStorage
