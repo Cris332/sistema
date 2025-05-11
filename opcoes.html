@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opções - Sistema de Controle de Serviços</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="js/config.js"></script>
+    <script src="js/navegacao.js"></script>
+    <script src="js/voz.js"></script>
+    <style>
+        :root {
+            --background-color: #f0f0f0;
+            --text-color: #333;
+            --primary-color: #6699cc;
+            --secondary-color: #3366cc;
+            --content-bg: #3366cc;
+            --form-bg: #e6e6e6;
+            --option-bg: #f9f9f9;
+            --border-color: #ddd;
+            --font-size-base: 16px;
+            --font-size-large: 18px;
+            --contrast-text: #000;
+            --contrast-bg: #fff;
+            --success-color: #5cb85c;
+            --warning-color: #f0ad4e;
+        }
+        
+        .dark-theme {
+            --background-color: #222;
+            --text-color: #f0f0f0;
+            --primary-color: #4477aa;
+            --secondary-color: #2244aa;
+            --content-bg: #1a1a2e;
+            --form-bg: #333;
+            --option-bg: #444;
+            --border-color: #555;
+            --contrast-text: #fff;
+            --contrast-bg: #111;
+            color-scheme: dark;
+        }
+        
+        /* Correção para textos em modo escuro */
+        .dark-theme input,
+        .dark-theme select,
+        .dark-theme textarea,
+        .dark-theme option,
+        .dark-theme .option-item,
+        .dark-theme .option-description,
+        .dark-theme .option-card {
+            background-color: var(--form-bg);
+            color: var(--text-color);
+        }
+        
+        .dark-theme .slider {
+            background-color: #555;
+        }
+        
+        .dark-theme .slider:before {
+            background-color: #f0f0f0;
+        }
+        
+        .dark-theme .color-option {
+            border-color: #555;
+        }
+        
+        .dark-theme .option-title {
+            color: var(--primary-color);
+            border-bottom-color: #555;
+        }
+        
+        .high-contrast {
+            --background-color: #000;
+            --text-color: #fff;
+            --primary-color: #fff;
+            --secondary-color: #fff;
+            --content-bg: #000;
+            --form-bg: #000;
+            --option-bg: #000;
+            --border-color: #fff;
+            --contrast-text: #fff;
+            --contrast-bg: #000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-size: var(--font-size-base);
+            transition: background-color 0.3s, color 0.3s, font-size 0.3s;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            border-radius: 5px;
+        }
+        
+        nav {
+            background-color: var(--form-bg);
+            padding: 10px 0;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .content {
+            background-color: var(--content-bg);
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        
+        .form-container {
+            background-color: var(--form-bg);
+            padding: 20px;
+            border-radius: 5px;
+        }
+        
+        .form-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+        
+        .option-group {
+            margin-bottom: 20px;
+            background-color: var(--option-bg);
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .option-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+        }
+        
+        .option-item {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option-item label {
+            margin-left: 10px;
+        }
+        
+        /* Estilos para tornar os checkboxes mais acessíveis */
+        .option-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .option-item input[type="range"] {
+            width: 100%;
+            max-width: 200px;
+            margin-right: 10px;
+        }
+        
+        .color-selector {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        
+        .color-selector span {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: inline-block;
+            border: 2px solid transparent;
+        }
+        
+        .color-selector span.active {
+            border-color: var(--text-color);
+        }
+        
+        .btn-save, .btn-restore {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 3px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto 0;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-restore {
+            background-color: var(--warning-color);
+            margin-top: 10px;
+        }
+        
+        .btn-save:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background-color: var(--success-color);
+            color: white;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            transform: translateX(150%);
+            transition: transform 0.5s;
+            z-index: 1000;
+            max-width: 300px;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        /* Estilos para acessibilidade */
+        .focus-visible:focus {
+            outline: 3px solid orange !important;
+            outline-offset: 3px;
+        }
+        
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary-color);
+            color: white;
+            padding: 8px;
+            z-index: 100;
+            transition: top 0.3s;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .option-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .option-item label {
+                margin-left: 0;
+                margin-top: 5px;
+            }
+            
+            .notification {
+                max-width: 90%;
+                left: 5%;
+                right: 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+    
+    <div class="container">
+        <header>
+            <h1>Sistema de Controle de Serviços</h1>
+        </header>
+        
+        <nav>
+            <ul>
+                <li><a href="index.html" class="focus-visible">Ordem de Serviço</a></li>
+                <li><a href="relatorio.html" class="focus-visible">Relatórios</a></li>
+                <li><a href="entregas.html" class="focus-visible">Entregas</a></li>
+                <li><a href="ajuda.html" class="focus-visible">Ajuda</a></li>
+                <li><a href="opcoes.html" class="focus-visible">Opções</a></li>
+            </ul>
+        </nav>
+        
+        <div class="content" id="main-content" tabindex="-1">
+            <div class="form-container">
+                <h2 class="form-title">Opções do Sistema</h2>
+                
+                <div class="option-group">
+                    <div class="option-title" id="aparencia-titulo">Aparência</div>
+                    <div class="option-item">
+                        <input type="checkbox" id="tema-escuro" class="focus-visible" aria-labelledby="aparencia-titulo">
+                        <label for="tema-escuro">Usar tema escuro</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="fonte-grande" class="focus-visible" aria-labelledby="aparencia-titulo">
+                        <label for="fonte-grande">Usar fonte maior</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="alto-contraste" class="focus-visible" aria-labelledby="aparencia-titulo">
+                        <label for="alto-contraste">Modo de alto contraste</label>
+                    </div>
+                    <div class="option-item">
+                        <label for="tamanho-fonte">Tamanho da fonte:</label>
+                        <input type="range" id="tamanho-fonte" min="12" max="24" step="1" value="16" class="focus-visible">
+                        <span id="valor-fonte">16px</span>
+                    </div>
+                </div>
+                
+                <div class="option-group">
+                    <div class="option-title" id="acessibilidade-titulo">Acessibilidade</div>
+                    <div class="option-item">
+                        <input type="checkbox" id="modo-fala" class="focus-visible" aria-labelledby="acessibilidade-titulo">
+                        <label for="modo-fala">Ativar modo de fala (leitura ao passar o mouse)</label>
+                    </div>
+                    <div class="option-item">
+                        <label for="velocidade-fala">Velocidade da fala:</label>
+                        <input type="range" id="velocidade-fala" min="0.5" max="2" step="0.1" value="1" class="focus-visible">
+                        <span id="valor-velocidade-fala">1.0</span>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="leitor-tela" class="focus-visible" aria-labelledby="acessibilidade-titulo">
+                        <label for="leitor-tela">Otimização para leitores de tela</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="navegar-teclado" class="focus-visible" aria-labelledby="acessibilidade-titulo">
+                        <label for="navegar-teclado">Navegação por teclado aprimorada</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="reducao-movimento" class="focus-visible" aria-labelledby="acessibilidade-titulo">
+                        <label for="reducao-movimento">Reduzir animações</label>
+                    </div>
+                </div>
+                
+                <div class="option-group">
+                    <div class="option-title" id="impressao-titulo">Impressão</div>
+                    <div class="option-item">
+                        <input type="checkbox" id="imprimir-logo" checked class="focus-visible" aria-labelledby="impressao-titulo">
+                        <label for="imprimir-logo">Incluir logotipo na impressão</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="imprimir-data" checked class="focus-visible" aria-labelledby="impressao-titulo">
+                        <label for="imprimir-data">Incluir data e hora na impressão</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="imprimir-cabecalho" checked class="focus-visible" aria-labelledby="impressao-titulo">
+                        <label for="imprimir-cabecalho">Incluir cabeçalho e rodapé</label>
+                    </div>
+                </div>
+                
+                <div class="option-group">
+                    <div class="option-title" id="notificacao-titulo">Notificações</div>
+                    <div class="option-item">
+                        <input type="checkbox" id="notificar-os-nova" class="focus-visible" aria-labelledby="notificacao-titulo">
+                        <label for="notificar-os-nova">Notificar ao criar nova OS</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="notificar-os-concluida" class="focus-visible" aria-labelledby="notificacao-titulo">
+                        <label for="notificar-os-concluida">Notificar ao concluir OS</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="notificar-cliente-novo" class="focus-visible" aria-labelledby="notificacao-titulo">
+                        <label for="notificar-cliente-novo">Notificar ao cadastrar novo cliente</label>
+                    </div>
+                    <div class="option-item">
+                        <label for="tempo-notificacao">Tempo de exibição da notificação (segundos):</label>
+                        <input type="range" id="tempo-notificacao" min="1" max="10" step="1" value="5" class="focus-visible">
+                        <span id="valor-tempo-notificacao">5s</span>
+                    </div>
+                </div>
+                
+                <div class="option-group">
+                    <div class="option-title" id="backup-titulo">Backup</div>
+                    <div class="option-item">
+                        <input type="checkbox" id="backup-automatico" class="focus-visible" aria-labelledby="backup-titulo">
+                        <label for="backup-automatico">Realizar backup automático diário</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="backup-nuvem" class="focus-visible" aria-labelledby="backup-titulo">
+                        <label for="backup-nuvem">Salvar backup na nuvem</label>
+                    </div>
+                    <div class="option-item">
+                        <label for="horario-backup">Horário para backup automático:</label>
+                        <input type="time" id="horario-backup" value="23:00" class="focus-visible">
+                    </div>
+                    <div class="option-item">
+                        <button type="button" id="btn-backup-manual" class="btn-save focus-visible" style="margin: 0;">Realizar Backup Agora</button>
+                    </div>
+                </div>
+                
+                <button type="button" class="btn-save focus-visible" id="btn-salvar-opcoes" aria-label="Salvar todas as configurações">Salvar Configurações</button>
+                <button type="button" class="btn-restore focus-visible" id="btn-restaurar-padrao" aria-label="Restaurar configurações padrão">Restaurar Padrões</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification">
+        <span id="notification-message">Configurações salvas com sucesso!</span>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos DOM
+            const btnSalvarOpcoes = document.getElementById('btn-salvar-opcoes');
+            const btnRestaurarPadrao = document.getElementById('btn-restaurar-padrao');
+            const btnBackupManual = document.getElementById('btn-backup-manual');
+            const notification = document.getElementById('notification');
+            const tamanhoFonte = document.getElementById('tamanho-fonte');
+            const valorFonte = document.getElementById('valor-fonte');
+            const tempoNotificacao = document.getElementById('tempo-notificacao');
+            const valorTempoNotificacao = document.getElementById('valor-tempo-notificacao');
+            
+            // Inicialização dos elementos de range
+            tamanhoFonte.addEventListener('input', function() {
+                valorFonte.textContent = `${this.value}px`;
+                aplicarTamanhoFonte(this.value);
+            });
+            
+            tempoNotificacao.addEventListener('input', function() {
+                valorTempoNotificacao.textContent = `${this.value}s`;
+            });
+            
+            // Inicialização do controle de velocidade de fala
+            const velocidadeFala = document.getElementById('velocidade-fala');
+            const valorVelocidade = document.getElementById('valor-velocidade');
+            
+            velocidadeFala.addEventListener('input', function() {
+                let descricao;
+                const valor = parseFloat(this.value);
+                
+                if (valor < 0.8) {
+                    descricao = 'Lenta';
+                } else if (valor > 1.2) {
+                    descricao = 'Rápida';
+                } else {
+                    descricao = 'Normal';
+                }
+                
+                valorVelocidade.textContent = `${descricao} (${valor.toFixed(1)}x)`;
+            });
+            
+            // Função para aplicar tema escuro
+            function aplicarTemaEscuro(ativar) {
+                if (ativar) {
+                    document.body.classList.add('dark-theme');
+                } else {
+                    document.body.classList.remove('dark-theme');
+                }
+            }
+            
+            // Função para aplicar alto contraste
+            function aplicarAltoContraste(ativar) {
+                if (ativar) {
+                    document.body.classList.add('high-contrast');
+                } else {
+                    document.body.classList.remove('high-contrast');
+                }
+            }
+            
+            // Função para aplicar fonte grande
+            function aplicarFonteGrande(ativar) {
+                document.documentElement.style.setProperty('--font-size-base', ativar ? 'var(--font-size-large)' : '16px');
+            }
+            
+            // Função para aplicar tamanho de fonte personalizado
+            function aplicarTamanhoFonte(tamanho) {
+                document.documentElement.style.setProperty('--font-size-base', `${tamanho}px`);
+                document.documentElement.style.setProperty('--font-size-large', `${Number(tamanho) + 2}px`);
+            }
+            
+            // Função para aplicar otimização para leitores de tela
+            function aplicarOtimizacaoLeitorTela(ativar) {
+                if (ativar) {
+                    document.body.setAttribute('role', 'application');
+                    // Adicionar mais atributos ARIA onde necessário
+                } else {
+                    document.body.removeAttribute('role');
+                }
+            }
+            
+            // Função para aplicar navegação por teclado aprimorada
+            function aplicarNavegacaoTeclado(ativar) {
+                const focusableElements = document.querySelectorAll('.focus-visible');
+                if (ativar) {
+                    focusableElements.forEach(el => {
+                        el.setAttribute('tabindex', '0');
+                    });
+                } else {
+                    focusableElements.forEach(el => {
+                        if (!['a', 'button', 'input', 'select', 'textarea'].includes(el.tagName.toLowerCase())) {
+                            el.removeAttribute('tabindex');
+                        }
+                    });
+                }
+            }
+            
+            // Função para reduzir animações
+            function aplicarReducaoMovimento(ativar) {
+                if (ativar) {
+                    const style = document.createElement('style');
+                    style.id = 'reducao-movimento-style';
+                    style.textContent = `
+                        * {
+                            animation-duration: 0.001s !important;
+                            transition-duration: 0.001s !important;
+                        }
+                    `;
+                    document.head.appendChild(style);
+                } else {
+                    const style = document.getElementById('reducao-movimento-style');
+                    if (style) style.remove();
+                }
+            }
+            
+            // Função simplificada para aplicar o modo de fala
+            // Usa o sistema centralizado definido em voz.js
+            function aplicarModoFala(ativar) {
+                // Obter a velocidade de fala do controle deslizante
+                const velocidade = parseFloat(document.getElementById('velocidade-fala').value);
+                
+                // Usar a função centralizada de ativar/desativar o modo de fala
+                ativarModoFala(ativar, velocidade);
+                
+                if (ativar) {
+                    // Anunciar que o modo de fala foi ativado
+                    setTimeout(() => {
+                        falarTexto('Modo de fala ativado. Passe o mouse sobre os elementos para ouvir sua descrição.');
+                    }, 500);
+                }
+            }
+            
+            // Exibir notificação
+            function mostrarNotificacao(mensagem, duracao = 5000) {
+                notification.querySelector('#notification-message').textContent = mensagem;
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, duracao);
+            }
+            
+            // Realizar backup
+            function realizarBackup() {
+                // Em uma implementação real, aqui seria feita uma requisição ao servidor
+                const date = new Date();
+                const dataFormatada = `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth()+1).toString().padStart(2, '0')}/${date.getFullYear()}`;
+                const horaFormatada = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+                
+                mostrarNotificacao(`Backup realizado com sucesso em ${dataFormatada} às ${horaFormatada}`);
+                
+                // Simular salvamento do backup
+                const backupData = {
+                    data: dataFormatada,
+                    hora: horaFormatada,
+                    tipo: 'manual'
+                };
+                
+                const backups = JSON.parse(localStorage.getItem('sistema_backups') || '[]');
+                backups.push(backupData);
+                localStorage.setItem('sistema_backups', JSON.stringify(backups));
+            }
+            
+            // Salvar configurações
+            function salvarConfiguracoes() {
+                const configuracoes = {
+                    aparencia: {
+                        temaEscuro: document.getElementById('tema-escuro').checked,
+                        fonteGrande: document.getElementById('fonte-grande').checked,
+                        altoContraste: document.getElementById('alto-contraste').checked,
+                        tamanhoFonte: document.getElementById('tamanho-fonte').value
+                    },
+                    acessibilidade: {
+                        modoFala: document.getElementById('modo-fala').checked,
+                        velocidadeFala: document.getElementById('velocidade-fala').value,
+                        leitorTela: document.getElementById('leitor-tela').checked,
+                        navegarTeclado: document.getElementById('navegar-teclado').checked,
+                        reducaoMovimento: document.getElementById('reducao-movimento').checked
+                    },
+                    impressao: {
+                        logo: document.getElementById('imprimir-logo').checked,
+                        data: document.getElementById('imprimir-data').checked,
+                        cabecalho: document.getElementById('imprimir-cabecalho').checked
+                    },
+                    notificacoes: {
+                        osNova: document.getElementById('notificar-os-nova').checked,
+                        osConcluida: document.getElementById('notificar-os-concluida').checked,
+                        clienteNovo: document.getElementById('notificar-cliente-novo').checked,
+                        tempo: document.getElementById('tempo-notificacao').value
+                    },
+                    backup: {
+                        automatico: document.getElementById('backup-automatico').checked,
+                        nuvem: document.getElementById('backup-nuvem').checked,
+                        horario: document.getElementById('horario-backup').value
+                    }
+                };
+                
+                // Salvar no localStorage
+                localStorage.setItem('sistema_configuracoes', JSON.stringify(configuracoes));
+                
+                // Aplicar as configurações
+                aplicarConfiguracoes(configuracoes);
+                
+                // Mostrar notificação
+                const tempoNotificacao = configuracoes.notificacoes.tempo * 1000;
+                mostrarNotificacao('Configurações salvas com sucesso!', tempoNotificacao);
+            }
+            
+            // Aplicar configurações
+            function aplicarConfiguracoes(config) {
+                // Aplicar tema e fonte
+                aplicarTemaEscuro(config.aparencia.temaEscuro);
+                aplicarFonteGrande(config.aparencia.fonteGrande);
+                aplicarAltoContraste(config.aparencia.altoContraste);
+                aplicarTamanhoFonte(config.aparencia.tamanhoFonte);
+                
+                // Aplicar acessibilidade
+                if (config.acessibilidade.modoFala !== undefined) {
+                    // Atualizar checkbox do modo de fala
+                    document.getElementById('modo-fala').checked = config.acessibilidade.modoFala;
+                    
+                    // Definir velocidade de fala
+                    if (config.acessibilidade.velocidadeFala !== undefined) {
+                        const valor = parseFloat(config.acessibilidade.velocidadeFala);
+                        document.getElementById('velocidade-fala').value = valor;
+                        
+                        // Atualizar texto da velocidade
+                        let descricao;
+                        if (valor < 0.8) {
+                            descricao = 'Lenta';
+                        } else if (valor > 1.2) {
+                            descricao = 'Rápida';
+                        } else {
+                            descricao = 'Normal';
+                        }
+                        document.getElementById('valor-velocidade').textContent = `${descricao} (${valor.toFixed(1)}x)`;
+                        
+                        // Atualizar velocidade global
+                        speechRate = valor;
+                    }
+                    
+                    // Ativar ou desativar modo de fala
+                    aplicarModoFala(config.acessibilidade.modoFala);
+                }
+                
+                aplicarOtimizacaoLeitorTela(config.acessibilidade.leitorTela);
+                aplicarNavegacaoTeclado(config.acessibilidade.navegarTeclado);
+                aplicarReducaoMovimento(config.acessibilidade.reducaoMovimento);
+                
+                // Aqui seriam aplicadas outras configurações, como impressão e backup
+                // Em uma implementação real, isso poderia envolver requisições ao servidor
+            }
+            
+            // Função para restaurar configurações padrão
+            function restaurarPadrao() {
+                // Usar a função global de restauração de configurações padrão
+                const configPadrao = restaurarConfiguracoesDefault();
+                
+                // Atualizar os campos do formulário com os valores padrão
+                document.getElementById('tema-escuro').checked = configPadrao.aparencia.temaEscuro;
+                document.getElementById('fonte-grande').checked = configPadrao.aparencia.fonteGrande;
+                document.getElementById('alto-contraste').checked = configPadrao.aparencia.altoContraste;
+                document.getElementById('tamanho-fonte').value = configPadrao.aparencia.tamanhoFonte;
+                document.getElementById('valor-fonte').textContent = `${configPadrao.aparencia.tamanhoFonte}px`;
+                
+                document.getElementById('leitor-tela').checked = configPadrao.acessibilidade.leitorTela;
+                document.getElementById('navegar-teclado').checked = configPadrao.acessibilidade.navegarTeclado;
+                document.getElementById('reducao-movimento').checked = configPadrao.acessibilidade.reducaoMovimento;
+                
+                document.getElementById('imprimir-logo').checked = configPadrao.impressao.logo;
+                document.getElementById('imprimir-data').checked = configPadrao.impressao.data;
+                document.getElementById('imprimir-cabecalho').checked = configPadrao.impressao.cabecalho;
+                
+                document.getElementById('notificar-os-nova').checked = configPadrao.notificacoes.osNova;
+                document.getElementById('notificar-os-concluida').checked = configPadrao.notificacoes.osConcluida;
+                document.getElementById('notificar-cliente-novo').checked = configPadrao.notificacoes.clienteNovo;
+                document.getElementById('tempo-notificacao').value = configPadrao.notificacoes.tempo;
+                document.getElementById('valor-tempo-notificacao').textContent = `${configPadrao.notificacoes.tempo}s`;
+                
+                document.getElementById('backup-automatico').checked = configPadrao.backup.automatico;
+                document.getElementById('backup-nuvem').checked = configPadrao.backup.nuvem;
+                document.getElementById('horario-backup').value = configPadrao.backup.horario;
+                
+                // Mostrar notificação
+                mostrarNotificacao('Configurações restauradas para os valores padrão!', configPadrao.notificacoes.tempo * 1000);
+            }
+            
+            // Carregar configurações salvas
+            function carregarConfiguracoes() {
+                // Tentar recuperar do localStorage
+                const configuracoesSalvas = localStorage.getItem('sistema_configuracoes');
+                
+                if (configuracoesSalvas) {
+                    const config = JSON.parse(configuracoesSalvas);
+                    
+                    // Definir valores nos campos de formulário
+                    // Aparência
+                    document.getElementById('tema-escuro').checked = config.aparencia.temaEscuro;
+                    document.getElementById('fonte-grande').checked = config.aparencia.fonteGrande;
+                    document.getElementById('alto-contraste').checked = config.aparencia.altoContraste;
+                    document.getElementById('tamanho-fonte').value = config.aparencia.tamanhoFonte;
+                    valorFonte.textContent = `${config.aparencia.tamanhoFonte}px`;
+                    
+                    // Acessibilidade
+                    if (config.acessibilidade) {
+                        document.getElementById('leitor-tela').checked = config.acessibilidade.leitorTela;
+                        document.getElementById('navegar-teclado').checked = config.acessibilidade.navegarTeclado;
+                        document.getElementById('reducao-movimento').checked = config.acessibilidade.reducaoMovimento;
+                    }
+                    
+                    // Impressão
+                    document.getElementById('imprimir-logo').checked = config.impressao.logo;
+                    document.getElementById('imprimir-data').checked = config.impressao.data;
+                    if (config.impressao.cabecalho !== undefined) {
+                        document.getElementById('imprimir-cabecalho').checked = config.impressao.cabecalho;
+                    }
+                    
+                    // Notificações
+                    document.getElementById('notificar-os-nova').checked = config.notificacoes.osNova;
+                    document.getElementById('notificar-os-concluida').checked = config.notificacoes.osConcluida;
+                    if (config.notificacoes.clienteNovo !== undefined) {
+                        document.getElementById('notificar-cliente-novo').checked = config.notificacoes.clienteNovo;
+                    }
+                    if (config.notificacoes.tempo !== undefined) {
+                        document.getElementById('tempo-notificacao').value = config.notificacoes.tempo;
+                        valorTempoNotificacao.textContent = `${config.notificacoes.tempo}s`;
+                    }
+                    
+                    // Backup
+                    document.getElementById('backup-automatico').checked = config.backup.automatico;
+                    document.getElementById('backup-nuvem').checked = config.backup.nuvem;
+                    if (config.backup.horario !== undefined) {
+                        document.getElementById('horario-backup').value = config.backup.horario;
+                    }
+                    
+                    // Aplicar configurações carregadas
+                    aplicarConfiguracoes(config);
+                } else {
+                    // Valores padrão se não houver configurações salvas
+                    document.getElementById('tema-escuro').checked = false;
+                    document.getElementById('fonte-grande').checked = false;
+                    document.getElementById('alto-contraste').checked = false;
+                    document.getElementById('tamanho-fonte').value = 16;
+                    valorFonte.textContent = '16px';
+                    
+                    document.getElementById('leitor-tela').checked = false;
+                    document.getElementById('navegar-teclado').checked = false;
+                    document.getElementById('reducao-movimento').checked = false;
+                    
+                    document.getElementById('imprimir-logo').checked = true;
+                    document.getElementById('imprimir-data').checked = true;
+                    document.getElementById('imprimir-cabecalho').checked = true;
+                    
+                    document.getElementById('notificar-os-nova').checked = false;
+                    document.getElementById('notificar-os-concluida').checked = false;
+                    document.getElementById('notificar-cliente-novo').checked = false;
+                    document.getElementById('tempo-notificacao').value = 5;
+                    valorTempoNotificacao.textContent = '5s';
+                    
+                    document.getElementById('backup-automatico').checked = false;
+                    document.getElementById('backup-nuvem').checked = false;
+                    document.getElementById('horario-backup').value = '23:00';
+                }
+            }
+            
+            // Event Listeners
+            document.addEventListener('DOMContentLoaded', function() {
+                carregarConfiguracoes();
+                
+                // Adicionar evento para o slider de velocidade de fala
+                document.getElementById('velocidade-fala').addEventListener('input', function() {
+                    const valor = parseFloat(this.value).toFixed(1);
+                    document.getElementById('valor-velocidade-fala').textContent = valor;
+                });
+            });
+            
+            btnSalvarOpcoes.addEventListener('click', salvarConfiguracoes);
+            btnRestaurarPadrao.addEventListener('click', restaurarPadrao);
+            btnBackupManual.addEventListener('click', function() {
+                // Simulação de backup manual
+                mostrarNotificacao('Backup manual iniciado...', 2000);
+                setTimeout(function() {
+                    mostrarNotificacao('Backup concluído com sucesso!', 3000);
+                }, 3000);
+            });
+            
+            // Acessibilidade: lidar com navegação por teclado
+            document.addEventListener('keydown', function(e) {
+                // Implementar atalhos de teclado
+                if (e.altKey && e.key === 's') { // Alt+S para salvar configurações
+                    e.preventDefault();
+                    salvarConfiguracoes();
+                }
+                
+                if (e.altKey && e.key === 'b') { // Alt+B para fazer backup
+                    e.preventDefault();
+                    realizarBackup();
+                }
+            });
+            
+            // Inicializar configurações
+            carregarConfiguracoes();
+        });
+    </script>
+</body>
+</html>

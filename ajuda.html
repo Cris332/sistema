@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajuda - Sistema de Controle de Serviços</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="js/config.js"></script>
+    <script src="js/navegacao.js"></script>
+    <script src="js/voz.js"></script>
+    <style>
+        :root {
+            --background-color: #f0f0f0;
+            --text-color: #333;
+            --primary-color: #6699cc;
+            --secondary-color: #3366cc;
+            --content-bg: #3366cc;
+            --form-bg: #e6e6e6;
+            --option-bg: #f9f9f9;
+            --border-color: #ddd;
+            --font-size-base: 16px;
+            --font-size-large: 18px;
+            --contrast-text: #000;
+            --contrast-bg: #fff;
+            --success-color: #5cb85c;
+            --warning-color: #f0ad4e;
+        }
+        
+        .dark-theme {
+            --background-color: #222;
+            --text-color: #f0f0f0;
+            --primary-color: #4477aa;
+            --secondary-color: #2244aa;
+            --content-bg: #1a1a2e;
+            --form-bg: #333;
+            --option-bg: #444;
+            --border-color: #555;
+            --contrast-text: #fff;
+            --contrast-bg: #111;
+            color-scheme: dark;
+        }
+        
+        /* Correção para textos em modo escuro */
+        .dark-theme input,
+        .dark-theme select,
+        .dark-theme textarea,
+        .dark-theme option,
+        .dark-theme button,
+        .dark-theme .accordion-content,
+        .dark-theme .tab-content,
+        .dark-theme .help-content p,
+        .dark-theme .help-content li {
+            background-color: var(--form-bg);
+            color: var(--text-color);
+        }
+        
+        .dark-theme .accordion-header {
+            background-color: var(--option-bg);
+            color: var(--text-color);
+        }
+        
+        .dark-theme pre code {
+            background-color: #2a2a2a;
+            color: #e6e6e6;
+            border-color: #555;
+        }
+        
+        .high-contrast {
+            --background-color: #000;
+            --text-color: #fff;
+            --primary-color: #fff;
+            --secondary-color: #fff;
+            --content-bg: #000;
+            --form-bg: #000;
+            --option-bg: #000;
+            --border-color: #fff;
+            --contrast-text: #fff;
+            --contrast-bg: #000;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-size: var(--font-size-base);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s, font-size 0.3s;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        nav {
+            background-color: var(--form-bg);
+            padding: 10px 0;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .content {
+            background-color: var(--content-bg);
+            padding: 20px;
+            border-radius: 5px;
+        }
+        
+        .form-container {
+            background-color: var(--form-bg);
+            padding: 20px;
+            border-radius: 5px;
+        }
+        
+        .tabs {
+            display: flex;
+            background-color: var(--option-bg);
+            border-bottom: 1px solid var(--border-color);
+            overflow-x: auto;
+        }
+        
+        .tab-btn {
+            padding: 12px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-color);
+            white-space: nowrap;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab-btn:hover {
+            color: var(--primary-color);
+            background-color: rgba(102, 153, 204, 0.05);
+        }
+        
+        .tab-btn.active {
+            color: var(--secondary-color);
+            border-bottom: 3px solid var(--secondary-color);
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 25px;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .form-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+        
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .help-section-icon {
+            margin-right: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .help-content {
+            margin-bottom: 30px;
+            padding-left: 10px;
+        }
+        
+        .help-content p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+        
+        .help-content ul, .help-content ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .help-content li {
+            margin-bottom: 8px;
+        }
+        
+        .accordion {
+            border: 1px solid #e0e5ec;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+        
+        .accordion-header {
+            background-color: #f8f9fa;
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .dark-theme .accordion-header {
+            background-color: #2a2a2a;
+            color: var(--text-color);
+        }
+        
+        .accordion-header:hover {
+            background-color: #edf2f7;
+        }
+        
+        .dark-theme .accordion-header:hover {
+            background-color: #3a3a3a;
+        }
+        
+        .accordion-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .accordion-content-inner {
+            padding: 15px;
+            border-top: 1px solid #e0e5ec;
+        }
+        
+        .dark-theme .accordion-content-inner {
+            border-top: 1px solid #444;
+        }
+        
+        .accordion.active .accordion-content {
+            max-height: 1000px;
+        }
+        
+        .help-note, .help-warning, .help-tip {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+        }
+        
+        .help-note {
+            background-color: rgba(22, 170, 255, 0.1);
+            border-left: 4px solid #16aaff;
+        }
+        
+        .dark-theme .help-note,
+        .dark-theme .help-warning,
+        .dark-theme .help-tip {
+            background-color: rgba(0, 0, 0, 0.3);
+            color: var(--text-color);
+        }
+        
+        .help-warning {
+            background-color: rgba(247, 185, 36, 0.1);
+            border-left: 4px solid #f7b924;
+        }
+        
+        .help-tip {
+            background-color: rgba(58, 196, 125, 0.1);
+            border-left: 4px solid #3ac47d;
+        }
+        
+        .help-steps {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+        
+        .dark-theme .help-steps {
+            background-color: #2a2a2a;
+            color: var(--text-color);
+        }
+        
+        .btn-back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #6699cc;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .btn-back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .btn-back-to-top:hover {
+            background-color: #3366cc;
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .tabs {
+                flex-wrap: wrap;
+            }
+            
+            .tab-btn {
+                flex: 1 1 auto;
+                text-align: center;
+            }
+            
+            .tab-content {
+                padding: 15px;
+            }
+        }
+
+        /* Estilo de impressão */
+        @media print {
+            .tabs, .btn-back-to-top {
+                display: none;
+            }
+            
+            .tab-content {
+                display: block;
+            }
+            
+            .accordion-content {
+                max-height: none;
+            }
+            
+            .container {
+                padding: 0;
+            }
+            
+            .content {
+                box-shadow: none;
+            }
+        }
+        
+        /* Estilos para tabela de atalhos de teclado */
+        .help-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background-color: var(--option-bg);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .help-table th {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: left;
+            padding: 10px;
+            font-weight: 600;
+        }
+        
+        .help-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .help-table tr:nth-child(even) {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+        
+        .help-table tr:hover {
+            background-color: rgba(102, 153, 204, 0.1);
+        }
+        
+        .dark-theme .help-table {
+            background-color: var(--form-bg);
+        }
+        
+        .dark-theme .help-table tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .dark-theme .help-table tr:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Estilos para dicas e notas */
+        .help-note, .help-tip {
+            margin: 15px 0;
+            padding: 12px 15px;
+            border-radius: 5px;
+            position: relative;
+        }
+        
+        .help-note {
+            background-color: rgba(240, 173, 78, 0.1);
+            border-left: 4px solid var(--warning-color);
+        }
+        
+        .help-tip {
+            background-color: rgba(92, 184, 92, 0.1);
+            border-left: 4px solid var(--success-color);
+        }
+        
+        .help-note p strong, .help-tip p strong {
+            color: var(--secondary-color);
+            display: inline-block;
+            margin-bottom: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sistema de Controle de Serviços</h1>
+        </header>
+        
+        <nav>
+            <ul>
+                <li><a href="index.html">Ordem de Serviço</a></li>
+                <li><a href="relatorio.html">Relatórios</a></li>
+                <li><a href="entregas.html">Entregas</a></li>
+                <li><a href="ajuda.html">Ajuda</a></li>
+                <li><a href="opcoes.html">Opções</a></li>
+            </ul>
+        </nav>
+        
+        <div class="content">
+            <div class="form-container">
+                <h2 class="form-title">Manual do Usuário</h2>
+                
+                <!-- Abas de navegação -->
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="introducao">
+                        <i class="fas fa-info-circle"></i> Introdução
+                    </button>
+                    <button class="tab-btn" data-tab="ordem-servico">
+                        <i class="fas fa-clipboard-list"></i> Ordem de Serviço
+                    </button>
+                    <button class="tab-btn" data-tab="relatorios">
+                        <i class="fas fa-chart-bar"></i> Relatórios
+                    </button>
+                    <button class="tab-btn" data-tab="entregas">
+                        <i class="fas fa-truck"></i> Entregas
+                    </button>
+                    <button class="tab-btn" data-tab="configuracoes">
+                        <i class="fas fa-cogs"></i> Configurações
+                    </button>
+                </div>
+                
+                <!-- Conteúdo das abas -->
+                <div class="tab-content active" id="introducao-tab">
+                    <div id="introducao">
+                        <h3 class="section-title"><i class="fas fa-info-circle help-section-icon"></i>Sobre o Sistema</h3>
+                        <div class="help-content">
+                            <p>Bem-vindo ao <strong>Sistema de Controle de Serviços</strong>! Esta ferramenta foi desenvolvida para facilitar o gerenciamento completo de ordens de serviço, controle de entregas e geração de relatórios para sua empresa.</p>
+                            <p>Este sistema oferece:</p>
+                            <ul>
+                                <li><strong>Gerenciamento de Ordens de Serviço</strong> - Cadastre, edite, pesquise e imprima ordens de serviço</li>
+                                <li><strong>Relatórios Detalhados</strong> - Gere análises completas de faturamento, produtividade e desempenho</li>
+                                <li><strong>Controle de Entregas</strong> - Acompanhe entregas e retiradas de equipamentos com rastreamento em tempo real</li>
+                                <li><strong>Opções de Personalização</strong> - Configure o sistema de acordo com suas preferências e necessidades</li>
+                            </ul>
+                            
+                            <div class="help-note">
+                                <p><strong>Nota:</strong> Este manual foi elaborado para guiar usuários de todos os níveis de experiência. Navegue pelas abas acima para encontrar informações detalhadas sobre cada funcionalidade.</p>
+                            </div>
+                        </div>
+                        
+                        <h3 class="section-title"><i class="fas fa-desktop help-section-icon"></i>Navegação no Sistema</h3>
+                        <div class="help-content">
+                            <p>O sistema está dividido em cinco seções principais, acessíveis pela barra de navegação superior:</p>
+                            <ul>
+                                <li><strong>Ordem de Serviço</strong> - Página inicial para gerenciamento das ordens de serviço</li>
+                                <li><strong>Relatórios</strong> - Geração e visualização de relatórios e gráficos</li>
+                                <li><strong>Entregas</strong> - Controle de entregas e retiradas de equipamentos</li>
+                                <li><strong>Ajuda</strong> - Este manual do usuário</li>
+                                <li><strong>Opções</strong> - Configurações e personalização do sistema</li>
+                            </ul>
+                        </div>
+                        
+                        <h3 class="section-title"><i class="fas fa-cog help-section-icon"></i>Requisitos do Sistema</h3>
+                        <div class="help-content">
+                            <p>Para utilizar este sistema de forma adequada:</p>
+                            <ul>
+                                <li>Navegador web atualizado (Chrome, Firefox, Edge ou Safari)</li>
+                                <li>Resolução mínima de tela recomendada: 1024x768</li>
+                                <li>JavaScript habilitado</li>
+                                <li>Para mapas e rastreamento de entregas: acesso à Internet</li>
+                            </ul>
+                            
+                            <div class="help-tip">
+                                <p><strong>Dica:</strong> Para melhor experiência, você pode personalizar a aparência do sistema na seção "Opções", incluindo temas escuros, alto contraste e tamanho de fonte.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="ordem-servico-tab">
+                    <!-- Seção de Ordens de Serviço -->
+                    <h3 class="section-title"><i class="fas fa-clipboard-list help-section-icon"></i>Gerenciamento de Ordens de Serviço</h3>
+                    <div class="help-content">
+                        <p>O módulo de Ordem de Serviço (OS) é o núcleo do sistema, permitindo o registro e controle completo dos serviços técnicos realizados. A página inicial do sistema apresenta o formulário de Ordem de Serviço com todos os campos necessários.</p>
+                    </div>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            <span><i class="fas fa-plus-circle help-section-icon"></i> Criando uma Nova Ordem de Serviço</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>Para cadastrar uma nova Ordem de Serviço:</p>
+                                <div class="help-steps">
+                                    <ol>
+                                        <li>Na página inicial, clique no botão <i class="fas fa-file"></i> (Novo) na barra de ferramentas</li>
+                                        <li>Os campos serão limpos para você inserir uma nova OS</li>
+                                        <li>Preencha os campos obrigatórios (marcados com *):
+                                            <ul>
+                                                <li><strong>Número OS</strong> - Identificador único da ordem de serviço</li>
+                                                <li><strong>Data</strong> - Data de abertura da OS</li>
+                                                <li><strong>Equipamento</strong> - Tipo/modelo do equipamento</li>
+                                                <li><strong>Defeito</strong> - Descrição do problema relatado</li>
+                                                <li><strong>Id Cliente</strong> - Código de identificação do cliente</li>
+                                            </ul>
+                                        </li>
+                                        <li>Preencha os campos opcionais conforme necessário:
+                                            <ul>
+                                                <li><strong>Serviço</strong> - Descrição do serviço realizado ou a realizar</li>
+                                                <li><strong>Técnico</strong> - Nome do técnico responsável</li>
+                                                <li><strong>Valor Total</strong> - Valor cobrado pelo serviço</li>
+                                                <li><strong>Cliente</strong> - Nome do cliente (preenchido automaticamente ao informar o Id)</li>
+                                            </ul>
+                                        </li>
+                                        <li>Clique no botão <i class="fas fa-save"></i> (Salvar) para registrar a OS</li>
+                                    </ol>
+                                </div>
+                                <div class="help-tip">
+                                    <p><strong>Dica:</strong> O sistema pode gerar automaticamente um número sequencial para cada nova OS, mas você pode alterá-lo se necessário.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            <span><i class="fas fa-search help-section-icon"></i> Pesquisando Ordens de Serviço</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>Para buscar ordens de serviço já cadastradas no sistema:</p>
+                                <div class="help-steps">
+                                    <ol>
+                                        <li>Na página inicial, clique no botão <i class="fas fa-search"></i> (Pesquisar) na barra de ferramentas</li>
+                                        <li>Uma janela de pesquisa será aberta com vários campos de filtro:</li>
+                                        <ul>
+                                            <li><strong>Número OS</strong> - Para localizar uma OS específica pelo número</li>
+                                            <li><strong>Data Inicial/Final</strong> - Para filtrar OS por período</li>
+                                            <li><strong>Cliente</strong> - Para buscar OS de um cliente específico</li>
+                                            <li><strong>Status</strong> - Para filtrar por status (em andamento, concluída, etc.)</li>
+                                            <li><strong>Técnico</strong> - Para listar OS atribuídas a um técnico específico</li>
+                                            <li><strong>Equipamento</strong> - Para buscar por tipo de equipamento</li>
+                                        </ul>
+                                        <li>Preencha um ou mais campos para filtrar sua busca</li>
+                                        <li>Clique em "Pesquisar" para executar a busca</li>
+                                        <li>Os resultados aparecerão em uma tabela abaixo</li>
+                                        <li>Clique em uma OS na tabela de resultados para abri-la no formulário principal</li>
+                                    </ol>
+                                </div>
+                                <div class="help-tip">
+                                    <p><strong>Dica:</strong> Se você não preencher nenhum campo de filtro e clicar em "Pesquisar", o sistema mostrará todas as ordens de serviço mais recentes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            <span><i class="fas fa-edit help-section-icon"></i> Editando uma Ordem de Serviço</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>Para modificar os dados de uma ordem de serviço existente:</p>
+                                <div class="help-steps">
+                                    <ol>
+                                        <li>Primeiro, localize a OS que deseja editar usando a função de pesquisa</li>
+                                        <li>Com a OS carregada no formulário principal, modifique os campos necessários:</li>
+                                        <ul>
+                                            <li>Atualize o "Defeito" ou "Serviço" com informações mais detalhadas</li>
+                                            <li>Modifique o "Técnico" responsável, se necessário</li>
+                                            <li>Ajuste o "Valor Total" conforme o serviço realizado</li>
+                                        </ul>
+                                        <li>Após fazer as alterações, clique no botão <i class="fas fa-save"></i> (Salvar) para atualizar os dados</li>
+                                        <li>O sistema confirmará que as alterações foram salvas com sucesso</li>
+                                    </ol>
+                                </div>
+                                <div class="help-warning">
+                                    <p><strong>Atenção:</strong> Tenha cuidado ao editar ordens de serviço. Modificar informações importantes como o número da OS pode causar inconsistências no sistema.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            <span><i class="fas fa-trash-alt help-section-icon"></i> Excluindo uma Ordem de Serviço</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>Para remover uma ordem de serviço do sistema:</p>
+                                <div class="help-steps">
+                                    <ol>
+                                        <li>Primeiro, localize a OS que deseja excluir usando a função de pesquisa</li>
+                                        <li>Com a OS carregada no formulário principal, clique no botão <i class="fas fa-trash-alt"></i> (Excluir)</li>
+                                        <li>Uma mensagem de confirmação será exibida</li>
+                                        <li>Confirme a exclusão para remover permanentemente a OS do sistema</li>
+                                    </ol>
+                                </div>
+                                <div class="help-warning">
+                                    <p><strong>Atenção:</strong> Esta ação não pode ser desfeita! Quando você exclui uma ordem de serviço, todos os dados relacionados a ela são removidos permanentemente do sistema.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            <span><i class="fas fa-print help-section-icon"></i> Imprimindo uma Ordem de Serviço</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>Para imprimir uma ordem de serviço:</p>
+                                <div class="help-steps">
+                                    <ol>
+                                        <li>Localize a OS que deseja imprimir usando a função de pesquisa</li>
+                                        <li>Com a OS carregada no formulário principal, clique no botão <i class="fas fa-print"></i> (Imprimir)</li>
+                                        <li>O sistema preparará uma versão formatada para impressão da OS</li>
+                                        <li>A janela de impressão do navegador será aberta</li>
+                                        <li>Selecione a impressora desejada e ajuste as configurações de impressão</li>
+                                        <li>Clique em "Imprimir" para enviar o documento para a impressora</li>
+                                    </ol>
+                                </div>
+                                <div class="help-tip">
+                                    <p><strong>Dica:</strong> Na seção "Opções" do sistema, você pode personalizar o formato de impressão das OS, incluindo ou removendo o logotipo da empresa, data e hora, cabeçalho e rodapé.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="clientes-tab">
+                    <!-- Seção de Clientes -->
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            <span><i class="fas fa-user-plus help-section-icon"></i> Cadastro de Clientes</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>Para cadastrar um novo cliente no sistema:</p>
+                                <div class="help-steps">
+                                    <ol>
+                                        <li>No menu principal, clique em <strong>"Clientes"</strong> e depois em <strong>"Novo Cliente"</strong>.</li>
+                                        <li>Preencha os dados do formulário:
+                                            <ul>
+                                                <li>Nome/Razão Social</li>
+                                                <li>CPF/CNPJ</li>
+                                                <li>Telefone</li>
+                                                <li>E-mail</li>
+                                                <li>Endereço completo</li>
+                                                <li>Tipo de cliente (Pessoa Física ou Jurídica)</li>
+                                            </ul>
+                                        </li>
+                                        <li>Clique em <strong>"Salvar"</strong> para finalizar o cadastro.</li>
+                                    </ol>
+                                </div>
+                                <div class="help-note">
+                                    <p><strong>Nota:</strong> Os campos marcados com asterisco (*) são obrigatórios e devem ser preenchidos para concluir o cadastro.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Adicione mais accordions para as outras seções de clientes aqui -->
+                </div>
+                
+                <div class="tab-content" id="relatorios-tab">
+                    <h3 class="section-title"><i class="fas fa-chart-bar help-section-icon"></i>Sistema de Relatórios</h3>
+                    <div class="help-content">
+                        <p>O módulo de Relatórios oferece ferramentas para análise de desempenho, controle financeiro e acompanhamento das atividades. Com ele, você pode gerar diversos tipos de relatórios para obter insights valiosos sobre o funcionamento do seu negócio.</p>
+                    </div>
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            <span><i class="fas fa-list-alt help-section-icon"></i> Tipos de Relatórios Disponíveis</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>O sistema oferece os seguintes tipos de relatórios para análise de dados:</p>
+                                <ul>
+                                    <li><strong>Relatório de Ordens de Serviço</strong> - Lista detalhada de todas as OS registradas no período selecionado, incluindo informações sobre cliente, equipamento, valor e status</li>
+                                    <li><strong>Relatório de Faturamento</strong> - Análise financeira completa mostrando o faturamento por período, cliente, tipo de serviço ou técnico responsável</li>
+                                    <li><strong>Relatório de Status</strong> - Visão geral da distribuição de OS por status (em andamento, concluída, cancelada, etc.)</li>
+                                    <li><strong>Relatório de Produtividade</strong> - Análise da quantidade de OS concluídas por período ou por técnico, permitindo avaliar a eficiência da equipe</li>
+                                </ul>
+                                <div class="help-tip">
+                                    <p><strong>Dica:</strong> Combine diferentes filtros para obter análises mais específicas, como faturamento por técnico em um determinado período.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            <span><i class="fas fa-file-alt help-section-icon"></i> Gerando um Relatório</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>Para gerar um relatório no sistema:</p>
+                                <div class="help-steps">
+                                    <ol>
+                                        <li>Acesse a seção "Relatórios" no menu principal</li>
+                                        <li>Selecione o tipo de relatório desejado no campo "Tipo de Relatório"</li>
+                                        <li>Especifique o período de análise nos campos "Data Inicial" e "Data Final"</li>
+                                        <li>Se disponível, selecione filtros adicionais relevantes para o tipo de relatório escolhido:</li>
+                                        <ul>
+                                            <li>Cliente</li>
+                                            <li>Técnico</li>
+                                            <li>Status</li>
+                                            <li>Tipo de Serviço</li>
+                                        </ul>
+                                        <li>Clique no botão "Gerar Relatório" para processar os dados</li>
+                                        <li>O relatório será exibido na tela com tabelas e gráficos</li>
+                                    </ol>
+                                </div>
+                                <div class="help-note">
+                                    <p><strong>Nota:</strong> Relatórios com muitos dados podem levar mais tempo para serem gerados. Para melhor performance, tente limitar o período de análise ou adicionar filtros mais específicos.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            <span><i class="fas fa-chart-pie help-section-icon"></i> Visualizando Gráficos</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>Os relatórios incluem representações gráficas dos dados para facilitar a análise. Esses gráficos são gerados automaticamente de acordo com o tipo de relatório:</p>
+                                <ul>
+                                    <li><strong>Gráficos de Barras</strong> - Utilizados para comparar valores entre categorias diferentes, como faturamento por técnico ou quantidade de OS por status</li>
+                                    <li><strong>Gráficos de Linha</strong> - Mostram a evolução de valores ao longo do tempo, como faturamento mensal ou número de OS por semana</li>
+                                    <li><strong>Gráficos de Pizza</strong> - Representam a proporção entre diferentes categorias, como distribuição de OS por tipo de serviço</li>
+                                </ul>
+                                <p>Para interagir com os gráficos:</p>
+                                <ul>
+                                    <li>Passe o mouse sobre os elementos do gráfico para ver informações detalhadas</li>
+                                    <li>Clique nas legendas para ocultar/mostrar categorias específicas</li>
+                                    <li>Use os controles de zoom, quando disponíveis, para focar em áreas específicas</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            <span><i class="fas fa-file-export help-section-icon"></i> Exportando Relatórios</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>Após gerar um relatório, você pode exportá-lo em diferentes formatos para uso externo:</p>
+                                <div class="help-steps">
+                                    <ol>
+                                        <li>Gere o relatório desejado com os filtros apropriados</li>
+                                        <li>Na parte inferior da página de relatório, encontre os botões de exportação:</li>
+                                        <ul>
+                                            <li><strong>Exportar para PDF</strong> - Cria um documento PDF com tabelas e gráficos, ideal para impressão ou compartilhamento</li>
+                                            <li><strong>Exportar para Excel</strong> - Gera uma planilha Excel contendo os dados do relatório, permitindo análises adicionais</li>
+                                        </ul>
+                                        <li>Clique no formato desejado e aguarde o download do arquivo</li>
+                                        <li>O arquivo será salvo automaticamente na pasta de downloads do seu navegador</li>
+                                    </ol>
+                                </div>
+                                <div class="help-tip">
+                                    <p><strong>Dica:</strong> O formato PDF é ideal para apresentações e relatórios formais, enquanto o formato Excel é melhor para análises adicionais e manipulação dos dados.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="entregas-tab">
+                    <h3 class="section-title"><i class="fas fa-truck help-section-icon"></i>Gerenciamento de Entregas</h3>
+                    <div class="help-content">
+                        <p>O módulo de Entregas do sistema permite o controle completo da logística de entrega e retirada de equipamentos, oferecendo rastreamento em tempo real e registro de todas as operações.</p>
+                    </div>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            <span><i class="fas fa-exchange-alt help-section-icon"></i> Tipos de Operações</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>O sistema oferece dois tipos de operações logísticas:</p>
+                                <ul>
+                                    <li><strong>Entrega</strong> - Utilizada quando um equipamento reparado será devolvido ao cliente</li>
+                                    <li><strong>Retirada</strong> - Utilizada quando um equipamento será coletado na localização do cliente para manutenção</li>
+                                </ul>
+                                <p>Selecione o tipo apropriado de operação usando os botões de rádio no início do formulário de Entregas.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            <span><i class="fas fa-plus-circle help-section-icon"></i> Registrando uma Nova Operação</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>Para registrar uma nova entrega ou retirada:</p>
+                                <div class="help-steps">
+                                    <ol>
+                                        <li>Acesse a seção "Entregas" no menu principal</li>
+                                        <li>Selecione o tipo de operação (Entrega ou Retirada)</li>
+                                        <li>Preencha os campos do formulário:
+                                            <ul>
+                                                <li><strong>Endereço</strong> - Endereço completo onde o equipamento será entregue ou retirado</li>
+                                                <li><strong>Cliente</strong> - Nome do cliente</li>
+                                                <li><strong>Item</strong> - Descrição do equipamento ou ferramenta</li>
+                                                <li><strong>Observações</strong> - Informações adicionais relevantes para a operação</li>
+                                            </ul>
+                                        </li>
+                                        <li>Clique no botão "Iniciar Entrega" ou "Iniciar Retirada" para começar a operação</li>
+                                    </ol>
+                                </div>
+                                <div class="help-note">
+                                    <p><strong>Nota:</strong> O sistema usa o endereço informado para calcular a rota no mapa e o tempo estimado de entrega ou retirada.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            <span><i class="fas fa-map-marked-alt help-section-icon"></i> Utilizando o Mapa</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>O módulo de Entregas inclui um mapa interativo que exibe:</p>
+                                <ul>
+                                    <li>A localização de origem (geralmente sua empresa)</li>
+                                    <li>A localização de destino (endereço do cliente)</li>
+                                    <li>A rota calculada entre os dois pontos</li>
+                                    <li>O tempo estimado de chegada</li>
+                                </ul>
+                                <p>Para interagir com o mapa:</p>
+                                <ul>
+                                    <li>Use os controles de zoom (+/-) para aproximar ou afastar a visualização</li>
+                                    <li>Arraste o mapa para navegar por diferentes áreas</li>
+                                    <li>Clique nos marcadores para ver informações detalhadas sobre cada ponto</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            <span><i class="fas fa-history help-section-icon"></i> Histórico e Status</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>O sistema mantém registro completo de todas as operações de entrega e retirada, permitindo:</p>
+                                <ul>
+                                    <li>Visualizar o status atual de cada operação</li>
+                                    <li>Acompanhar o histórico completo de ações</li>
+                                    <li>Registrar momentos importantes como início, chegada e conclusão</li>
+                                </ul>
+                                <p>Os status possíveis para uma operação incluem:</p>
+                                <ul>
+                                    <li><strong>Aguardando início</strong> - Operação registrada mas ainda não iniciada</li>
+                                    <li><strong>Em andamento</strong> - Operação iniciada e em progresso</li>
+                                    <li><strong>Concluída</strong> - Operação finalizada com sucesso</li>
+                                    <li><strong>Cancelada</strong> - Operação cancelada antes da conclusão</li>
+                                </ul>
+                                <div class="help-tip">
+                                    <p><strong>Dica:</strong> Você pode cancelar uma operação em andamento utilizando o botão "Cancelar", que será ativado após o início da entrega ou retirada.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="configuracoes-tab">
+                    <h3 class="section-title"><i class="fas fa-cogs help-section-icon"></i>Opções do Sistema</h3>
+                    <div class="help-content">
+                        <p>A página de Opções permite personalizar diversos aspectos do sistema, adaptando-o às suas necessidades específicas. As configurações estão organizadas em categorias para fácil navegação.</p>
+                    </div>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            <span><i class="fas fa-palette help-section-icon"></i> Aparência</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>As opções de aparência permitem personalizar a interface visual do sistema:</p>
+                                <ul>
+                                    <li><strong>Tema Escuro</strong> - Alterna entre o tema claro (padrão) e o tema escuro, ideal para uso noturno ou ambientes com pouca luz</li>
+                                    <li><strong>Fonte Grande</strong> - Aumenta o tamanho do texto em todo o sistema para melhor legibilidade</li>
+                                    <li><strong>Alto Contraste</strong> - Ativa um modo de alto contraste para usuários com dificuldades visuais</li>
+                                    <li><strong>Tamanho da Fonte</strong> - Controle deslizante que permite ajustar o tamanho exato da fonte de 12px a 24px</li>
+                                </ul>
+                                <div class="help-tip">
+                                    <p><strong>Dica:</strong> O tema escuro é especialmente útil para reduzir o cansaço visual durante uso prolongado do sistema.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            <span><i class="fas fa-universal-access help-section-icon"></i> Acessibilidade</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>As opções de acessibilidade tornam o sistema mais inclusivo:</p>
+                                <ul>
+                                    <li><strong>Modo de Fala</strong> - Ativa a leitura automática dos elementos da interface quando você passa o mouse sobre eles. O sistema utiliza uma voz feminina em português brasileiro (quando disponível) para descrever: 
+                                        <ul>
+                                            <li>Textos e cabeçalhos das páginas</li>
+                                            <li>Botões e suas funções específicas</li>
+                                            <li>Links e para onde eles direcionam</li>
+                                            <li>Campos de formulário e seu propósito</li>
+                                            <li>Imagens e seus conteúdos</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Velocidade da Fala</strong> - Controle deslizante que permite ajustar a velocidade de leitura do texto, de lenta (0.5x) a rápida (2.0x)</li>
+                                    <li><strong>Leitor de Tela</strong> - Otimiza a interface para funcionar melhor com leitores de tela para deficientes visuais</li>
+                                    <li><strong>Navegação por Teclado</strong> - Ativa recursos de navegação avançada por teclado, incluindo atalhos Alt e indicação visual de foco</li>
+                                    <li><strong>Reduzir Animações</strong> - Minimiza ou elimina todas as animações da interface para usuários sensibilizados por movimentos</li>
+                                </ul>
+                                <div class="help-tip">
+                                    <p><strong>Dica:</strong> O modo de fala é especialmente útil para pessoas com deficiência visual parcial ou dificuldade de leitura, permitindo ouvir o conteúdo da tela sem necessidade de um leitor de tela completo.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            <span><i class="fas fa-keyboard help-section-icon"></i> Navegação por Teclado e Atalhos</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>O sistema oferece atalhos de teclado avançados para navegação rápida e eficiente sem necessidade do mouse. Para ativar esses recursos, marque a opção "Navegação por Teclado" na página de Opções.</p>
+                                
+                                <div class="help-tip">
+                                    <i class="fas fa-lightbulb"></i>
+                                    <p>Todos os recursos de navegação por teclado foram projetados para funcionar com leitores de tela, melhorando significativamente a acessibilidade do sistema.</p>
+                                </div>
+                                
+                                <h4>Navegação entre Páginas (Alt + Número)</h4>
+                                <p>Pressione a tecla Alt junto com o número correspondente para navegar rapidamente entre as páginas principais do sistema:</p>
+                                <table class="help-table">
+                                    <tr>
+                                        <th>Atalho</th>
+                                        <th>Destino</th>
+                                        <th>Descrição</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Alt + 1</td>
+                                        <td>Página inicial / Ordens de Serviço</td>
+                                        <td>Acessa a página principal de gerenciamento de ordens de serviço</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Alt + 2</td>
+                                        <td>Clientes</td>
+                                        <td>Acessa o cadastro e gerenciamento de clientes</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Alt + 3</td>
+                                        <td>Relatórios</td>
+                                        <td>Acessa o sistema de relatórios e análises</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Alt + 4</td>
+                                        <td>Opções</td>
+                                        <td>Acessa a página de configurações do sistema</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Alt + 5</td>
+                                        <td>Ajuda</td>
+                                        <td>Acessa esta página de ajuda</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Alt + 0</td>
+                                        <td>Sistema de entregas</td>
+                                        <td>Acessa o módulo de gerenciamento de entregas</td>
+                                    </tr>
+                                </table>
+                                
+                                <h4>Ações Comuns (Alt + Letra)</h4>
+                                <p>Use esses atalhos para executar ações frequentes em qualquer página do sistema:</p>
+                                <table class="help-table">
+                                    <tr>
+                                        <th>Atalho</th>
+                                        <th>Ação</th>
+                                        <th>Disponível em</th>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Alt+S</strong></td>
+                                        <td>Salvar</td>
+                                        <td>Qualquer formulário ou página de configurações</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Alt+P</strong></td>
+                                        <td>Pesquisar</td>
+                                        <td>Páginas com opção de pesquisa</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Alt+N</strong></td>
+                                        <td>Novo</td>
+                                        <td>Páginas de cadastro (OS, clientes, etc.)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Alt+X</strong></td>
+                                        <td>Excluir</td>
+                                        <td>Páginas de cadastro com opção de exclusão</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Alt+B</strong></td>
+                                        <td>Backup</td>
+                                        <td>Página de opções</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Alt+L</strong></td>
+                                        <td>Limpar</td>
+                                        <td>Qualquer formulário ou tela de pesquisa</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Alt+I</strong></td>
+                                        <td>Imprimir</td>
+                                        <td>Páginas com opção de impressão</td>
+                                    </tr>
+                                </table>
+                                
+                                <h4>Navegação com Teclado</h4>
+                                <p>Quando a navegação por teclado está ativada, você pode usar as teclas de seta para navegar entre elementos da interface:</p>
+                                <ul>
+                                    <li><strong>Tab</strong> - Navega sequencialmente entre todos os elementos interativos</li>
+                                    <li><strong>Shift+Tab</strong> - Navega na ordem inversa</li>
+                                    <li><strong>Setas ← →</strong> - Navega entre itens de menu horizontal ou ajusta valores em controles deslizantes</li>
+                                    <li><strong>Setas ↑ ↓</strong> - Navega entre itens de menu vertical e opções em listas</li>
+                                    <li><strong>Enter</strong> - Ativa o elemento selecionado (botões, links, etc.)</li>
+                                    <li><strong>Espaço</strong> - Alterna opções (checkboxes, radio buttons)</li>
+                                    <li><strong>Esc</strong> - Fecha menus abertos, caixas de diálogo ou cancela a operação atual</li>
+                                    <li><strong>Home/End</strong> - Vai para o início ou final de uma lista ou página</li>
+                                </ul>
+                                
+                                <h4>Teclas de Acesso Rápido para Elementos Principais</h4>
+                                <p>Para acessar elementos principais da interface rapidamente, use a combinação <strong>Alt+Shift+Letra</strong>:</p>
+                                <ul>
+                                    <li><strong>Alt+Shift+C</strong> - Foca no conteúdo principal da página</li>
+                                    <li><strong>Alt+Shift+M</strong> - Foca no menu de navegação principal</li>
+                                    <li><strong>Alt+Shift+F</strong> - Foca no primeiro campo de formulário</li>
+                                    <li><strong>Alt+Shift+B</strong> - Foca no botão principal da página (geralmente Salvar ou Enviar)</li>
+                                </ul>
+                                
+                                <h4>Modo de Fala e Leitura de Tela</h4>
+                                <p>O sistema oferece um modo de fala que lê o texto dos elementos quando o mouse passa sobre eles ou quando são focados pelo teclado:</p>
+                                <ul>
+                                    <li>Ative o modo de fala na página de Opções, na seção "Acessibilidade"</li>
+                                    <li>Ajuste a velocidade da fala usando o controle deslizante</li>
+                                    <li>A leitura é automática ao navegar com o mouse ou teclado quando o modo está ativado</li>
+                                    <li>O sistema seleciona automaticamente uma voz feminina em português brasileiro, quando disponível</li>
+                                </ul>
+                                
+                                <div class="help-note">
+                                    <p><strong>Nota sobre compatibilidade:</strong> Os atalhos Alt podem variar de acordo com o navegador utilizado. Em alguns navegadores, pode ser necessário pressionar Alt+Shift+Letra.</p>
+                                </div>
+                                
+                                <div class="help-tip">
+                                    <p><strong>Dica:</strong> Quando a navegação por teclado está ativa, um indicador visual destaca o elemento que está em foco, tornando mais fácil identificar onde você está na página.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            <span><i class="fas fa-print help-section-icon"></i> Impressão</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>As opções de impressão controlam como os documentos serão formatados quando impressos:</p>
+                                <ul>
+                                    <li><strong>Imprimir Logotipo</strong> - Inclui ou remove o logotipo da empresa nas impressões de OS e relatórios</li>
+                                    <li><strong>Imprimir Data/Hora</strong> - Adiciona ou remove a data e hora de impressão nos documentos</li>
+                                    <li><strong>Incluir Cabeçalho e Rodapé</strong> - Controla a exibição de informações da empresa no cabeçalho e rodapé das páginas impressas</li>
+                                </ul>
+                                <div class="help-tip">
+                                    <p><strong>Dica:</strong> Para documentos oficiais enviados a clientes, recomendamos manter todas as opções de impressão ativadas para uma apresentação profissional.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            <span><i class="fas fa-bell help-section-icon"></i> Notificações</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>Configure como e quando o sistema deve enviar alertas:</p>
+                                <ul>
+                                    <li><strong>Notificar Nova OS</strong> - Exibe uma notificação quando uma nova ordem de serviço é registrada</li>
+                                    <li><strong>Notificar OS Concluída</strong> - Alerta quando uma ordem de serviço é marcada como concluída</li>
+                                    <li><strong>Notificar Novo Cliente</strong> - Avisa quando um novo cliente é cadastrado no sistema</li>
+                                    <li><strong>Tempo de Notificação</strong> - Controle deslizante que define por quantos segundos as notificações ficam visíveis na tela</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            <span><i class="fas fa-database help-section-icon"></i> Backup</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>As opções de backup ajudam a proteger seus dados contra perdas:</p>
+                                <ul>
+                                    <li><strong>Backup Automático</strong> - Ativa ou desativa a realização automática de backups periódicos</li>
+                                    <li><strong>Backup na Nuvem</strong> - Define se os backups devem ser armazenados localmente ou sincronizados com um serviço de armazenamento na nuvem</li>
+                                    <li><strong>Horário do Backup</strong> - Define em qual horário do dia o sistema deve realizar o backup automático</li>
+                                    <li><strong>Backup Manual</strong> - Botão para realizar imediatamente um backup completo do sistema</li>
+                                </ul>
+                                <div class="help-warning">
+                                    <p><strong>Atenção:</strong> Recomendamos manter o backup automático sempre ativado e realizar backups manuais adicionais antes de fazer grandes alterações no sistema.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            <span><i class="fas fa-save help-section-icon"></i> Salvando as Configurações</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>Depois de fazer suas personalizações, você precisa salvá-las:</p>
+                                <div class="help-steps">
+                                    <ol>
+                                        <li>Ajuste todas as configurações desejadas nas várias categorias</li>
+                                        <li>Clique no botão "Salvar Opções" na parte inferior da página</li>
+                                        <li>Uma notificação confirmará que suas configurações foram salvas</li>
+                                        <li>As novas configurações entrarão em vigor imediatamente</li>
+                                    </ol>
+                                </div>
+                                <p>Se desejar restaurar todas as configurações para os valores padrão, clique no botão "Restaurar Padrão".</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <button class="btn-back-to-top" id="btnBackToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+        // Script para controlar as abas
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gerenciamento de abas
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active class from all tabs
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to current tab
+                    btn.classList.add('active');
+                    const tabId = btn.getAttribute('data-tab');
+                    document.getElementById(tabId + '-tab').classList.add('active');
+                });
+            });
+            
+            // Gerenciamento de accordions
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const accordion = header.parentElement;
+                    accordion.classList.toggle('active');
+                    const icon = header.querySelector('.fa-chevron-down');
+                    if (accordion.classList.contains('active')) {
+                        icon.style.transform = 'rotate(180deg)';
+                    } else {
+                        icon.style.transform = 'rotate(0deg)';
+                    }
+                });
+            });
+            
+            // Botão voltar ao topo
+            const btnBackToTop = document.getElementById('btnBackToTop');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    btnBackToTop.classList.add('visible');
+                } else {
+                    btnBackToTop.classList.remove('visible');
+                }
+            });
+            
+            btnBackToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
