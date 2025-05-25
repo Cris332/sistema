@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Controle de Serviços</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="js/app.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/navegacao.js"></script>
+    <script src="js/voz.js"></script>
+   <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <!-- Tela de pesquisa (modal) -->
+    <div class="search-screen" id="search-screen">
+        <div class="search-container">
+            <div class="search-header">
+                <h2 class="search-title">Pesquisa de Ordens de Serviço</h2>
+                <button class="close-btn" id="close-search-btn">&times;</button>
+            </div>
+            
+            <div class="search-form">
+                <div class="search-criteria">
+                    <div class="search-field">
+                        <label for="search-numero-os">Número OS</label>
+                        <input type="text" id="search-numero-os" placeholder="Digite o número da OS">
+                    </div>
+                    
+                    <div class="search-field">
+                        <label for="search-cliente">Cliente</label>
+                        <input type="text" id="search-cliente" placeholder="Nome ou ID do cliente">
+                    </div>
+                    
+                    <!-- Campos ocultos mas mantidos para compatibilidade com o código existente -->
+                    <div class="search-field" style="display: none;">
+                        <label for="search-data-abertura">Data de Abertura</label>
+                        <input type="date" id="search-data-abertura">
+                    </div>
+                    
+                    <div class="search-field" style="display: none;">
+                        <label for="search-equipamento">Equipamento</label>
+                        <input type="text" id="search-equipamento" placeholder="Tipo de equipamento">
+                    </div>
+                </div>
+                
+                <div class="search-buttons">
+                    <button type="button" class="search-btn" id="btn-executar-pesquisa">Pesquisar</button>
+                    <button type="button" class="clear-btn" id="btn-limpar-pesquisa">Limpar</button>
+                </div>
+            </div>
+            
+            <div class="results-container">
+                <h3>Resultados da Pesquisa</h3>
+                <table id="results-table">
+                    <thead>
+                        <tr>
+                            <th>Número OS</th>
+                            <th>Data</th>
+                            <th>Cliente</th>
+                            <th>Equipamento</th>
+                            <th>Valor</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="results-body">
+                        <!-- Os resultados serão inseridos aqui via JavaScript -->
+                    </tbody>
+                </table>
+                <div id="no-results-message" style="display: none;">Nenhum resultado encontrado.</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>Sistema de Controle de Serviços</h1>
+        </header>
+        
+        <nav>
+            <ul>
+                <li><a href="index.html">Ordem de Serviço</a></li>
+                <li><a href="relatorio.html">Relatórios</a></li>
+                <li><a href="entregas.html">Entregas</a></li>
+                <li><a href="ajuda.html">Ajuda</a></li>
+                <li><a href="opcoes.html">Opções</a></li>
+            </ul>
+        </nav>
+        
+        <div class="content">
+            <div class="form-container" id="os-form-container">
+                <h2 class="form-title">Ordem de Serviços</h2>
+                
+                <div class="required-info">*Campos Obrigatórios</div>
+                
+                <form id="os-form">
+                    <div class="form-group">
+                        <label for="numero-os" class="required">Número OS</label>
+                        <input type="text" id="numero-os" name="numero-os" required>
+                        
+                        <label for="data" class="required" style="margin-left: 20px;">Data</label>
+                        <input type="date" id="data" name="data" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="equipamento" class="required">Equipamento</label>
+                        <input type="text" id="equipamento" name="equipamento" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="defeito" class="required">Defeito</label>
+                        <input type="text" id="defeito" name="defeito" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="servico">Serviço</label>
+                        <input type="text" id="servico" name="servico">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="tecnico">Técnico</label>
+                        <input type="text" id="tecnico" name="tecnico">
+                        
+                        <label for="valor-total" style="margin-left: 20px;">Valor total</label>
+                        <input type="number" id="valor-total" name="valor-total" step="0.01">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="id-cliente" class="required">Id Cliente</label>
+                        <input type="text" id="id-cliente" name="id-cliente" required>
+                        
+                        <label for="cliente" style="margin-left: 20px;">Cliente</label>
+                        <input type="text" id="cliente" name="cliente">
+                    </div>
+                    
+                    <div class="buttons">
+                        <button type="button" class="btn" id="btn-novo" title="Novo">
+                            <i class="fas fa-file"></i>
+                        </button>
+                        <button type="button" class="btn" id="btn-salvar" title="Salvar">
+                            <i class="fas fa-save"></i>
+                        </button>
+                        <button type="button" class="btn" id="btn-pesquisar" title="Pesquisar">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <button type="button" class="btn" id="btn-excluir" title="Excluir">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                        <button type="button" class="btn" id="btn-imprimir" title="Imprimir">
+                            <i class="fas fa-print"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

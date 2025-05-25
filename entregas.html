@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Entregas - Sistema de Controle de Serviços</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <!-- Leaflet MiniMap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.min.css" />
+    <!-- Leaflet Locate Control CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.css" />
+    
+    <!-- Scripts do Sistema -->
+    <script src="js/config.js"></script>
+    <script src="js/navegacao.js"></script>
+    <script src="js/voz.js"></script>
+    
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- Leaflet MiniMap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.min.js"></script>
+    <!-- Leaflet Locate Control JS -->
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.js"></script>
+    
+    <!-- Script de Entregas (após carregar as dependências) -->
+    <script src="js/entregas.js"></script>
+    <link rel="stylesheet" href="css/entregas.css">
+    
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sistema de Controle de Serviços</h1>
+        </header>
+        
+        <nav>
+            <ul>
+                <li><a href="index.html">Ordem de Serviço</a></li>
+                <li><a href="relatorio.html">Relatórios</a></li>
+                <li><a href="entregas.html" class="active">Entregas</a></li>
+                <li><a href="ajuda.html">Ajuda</a></li>
+                <li><a href="opcoes.html">Opções</a></li>
+            </ul>
+        </nav>
+        
+        <div class="content">
+            <div class="form-container">
+                <h2 class="form-title">Gerenciamento de Entregas</h2>
+                
+                <div class="delivery-container">
+                    <div class="delivery-form">
+                        <div class="delivery-type">
+                            <label>
+                                <input type="radio" name="tipo-operacao" value="entrega" checked>
+                                Entrega
+                            </label>
+                            <label>
+                                <input type="radio" name="tipo-operacao" value="retirada">
+                                Retirada
+                            </label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="endereco" class="required">Endereço:</label>
+                            <input type="text" id="endereco" placeholder="Digite o endereço completo" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cliente">Cliente:</label>
+                            <input type="text" id="cliente" placeholder="Nome do cliente">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="item">Item:</label>
+                            <input type="text" id="item" placeholder="Ferramenta ou equipamento">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="observacoes">Observações:</label>
+                            <input type="text" id="observacoes" placeholder="Observações adicionais">
+                        </div>
+                        
+                        <div class="delivery-controls">
+                            <button id="btn-iniciar" class="btn btn-primary">Iniciar Entrega</button>
+                            <button id="btn-cancelar" class="btn btn-warning" disabled>Cancelar</button>
+                        </div>
+                        
+                        <div class="delivery-status">
+                            <h3><i class="fas fa-truck truck-icon"></i>Status da Entrega</h3>
+                            <p id="status-entrega">Aguardando início da operação</p>
+                            <p id="tempo-estimado"></p>
+                        </div>
+                        
+                        <div class="delivery-log">
+                            <h3>Histórico</h3>
+                            <div id="log-container"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="map-container">
+                        <div id="map"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification">
+        <span id="notification-message"></span>
+    </div>
+    
+    <!-- Não é necessário importar o Leaflet JS novamente, pois já foi importado no cabeçalho -->
+</body>
+</html>

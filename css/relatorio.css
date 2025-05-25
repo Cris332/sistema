@@ -1,0 +1,356 @@
+
+:root {
+    --background-color: #f0f0f0;
+    --text-color: #333;
+    --primary-color: #6699cc;
+    --secondary-color: #3366cc;
+    --content-bg: #3366cc;
+    --form-bg: #e6e6e6;
+    --option-bg: #f9f9f9;
+    --border-color: #ddd;
+    --font-size-base: 16px;
+    --font-size-large: 18px;
+    --contrast-text: #000;
+    --contrast-bg: #fff;
+    --success-color: #5cb85c;
+    --warning-color: #f0ad4e;
+}
+
+.dark-theme {
+    --background-color: #222;
+    --text-color: #f0f0f0;
+    --primary-color: #4477aa;
+    --secondary-color: #2244aa;
+    --content-bg: #1a1a2e;
+    --form-bg: #333;
+    --option-bg: #444;
+    --border-color: #555;
+    --contrast-text: #fff;
+    --contrast-bg: #111;
+    color-scheme: dark;
+}
+
+.dark-theme input, 
+.dark-theme select, 
+.dark-theme textarea,
+.dark-theme .form-control,
+.dark-theme option,
+.dark-theme button,
+.dark-theme .chart-container,
+.dark-theme .filter-field,
+.dark-theme .export-option,
+.dark-theme .date-range {
+    background-color: var(--form-bg);
+    color: var(--text-color);
+    border-color: #555;
+}
+
+.dark-theme .report-card {
+    background-color: var(--form-bg);
+}
+
+.dark-theme .filter-label,
+.dark-theme .report-title,
+.dark-theme .chart-title {
+    color: var(--text-color);
+}
+
+.dark-theme .btn,
+.dark-theme .export-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Cores para gráficos em modo escuro */
+.dark-theme .chart-container canvas {
+    background-color: var(--form-bg);
+}
+
+.dark-theme .chart-container {
+    background-color: #2a2a2a;
+    border-color: #555;
+}
+
+.dark-theme .filter-section {
+    background-color: #333;
+    border-color: #555;
+}
+
+.dark-theme table {
+    color: #f0f0f0;
+    border-color: #555;
+}
+
+.dark-theme th {
+    background-color: #2a2a2a;
+}
+
+.dark-theme tr:nth-child(even) {
+    background-color: #333;
+}
+
+.dark-theme tr:nth-child(odd) {
+    background-color: #2a2a2a;
+}
+
+.high-contrast {
+    --background-color: #000;
+    --text-color: #fff;
+    --primary-color: #fff;
+    --secondary-color: #fff;
+    --content-bg: #000;
+    --form-bg: #000;
+    --option-bg: #000;
+    --border-color: #fff;
+    --contrast-text: #fff;
+    --contrast-bg: #000;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-size: var(--font-size-base);
+    transition: background-color 0.3s, color 0.3s, font-size 0.3s;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    border-radius: 5px;
+}
+
+nav {
+    background-color: var(--form-bg);
+    padding: 10px 0;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.content {
+    background-color: var(--content-bg);
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.form-container {
+    background-color: var(--form-bg);
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.form-title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+.report-filters {
+    background-color: var(--option-bg);
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+}
+
+.filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.filter-field {
+    flex: 1;
+    min-width: 200px;
+}
+
+.filter-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.filter-field input, .filter-field select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+}
+
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.btn-filter {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.btn-clear {
+    background-color: #ddd;
+    color: #333;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.dark-theme .btn-clear {
+    background-color: #555;
+    color: #f0f0f0;
+}
+
+.report-section {
+    margin-top: 20px;
+}
+
+.report-title {
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 5px;
+}
+
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.report-table th, .report-table td {
+    border: 1px solid var(--border-color);
+    padding: 8px;
+    text-align: left;
+}
+
+.report-table th {
+    background-color: #f2f2f2;
+}
+
+.dark-theme .report-table th {
+    background-color: #2a2a2a;
+    color: #f0f0f0;
+}
+
+.report-summary {
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.dark-theme .report-summary {
+    background-color: var(--form-bg);
+    border-color: #555;
+    color: var(--text-color);
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dashed #ddd;
+}
+
+.dark-theme .summary-item {
+    border-bottom-color: #555;
+}
+
+.summary-label {
+    font-weight: bold;
+}
+
+.dark-theme .summary-label,
+.dark-theme .summary-value {
+    color: var(--text-color);
+}
+
+.chart-container {
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chart-placeholder {
+    color: #999;
+    text-align: center;
+}
+
+.dark-theme .chart-placeholder {
+    color: #ccc;
+}
+
+.btn-export {
+    background-color: var(--success-color);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .filter-row {
+        flex-direction: column;
+    }
+    
+    .filter-field {
+        width: 100%;
+    }
+}

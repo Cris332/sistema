@@ -1,0 +1,291 @@
+
+:root {
+    --background-color: #f0f0f0;
+    --text-color: #333;
+    --primary-color: #6699cc;
+    --secondary-color: #3366cc;
+    --content-bg: #3366cc;
+    --form-bg: #e6e6e6;
+    --option-bg: #f9f9f9;
+    --border-color: #ddd;
+    --font-size-base: 16px;
+    --font-size-large: 18px;
+    --contrast-text: #000;
+    --contrast-bg: #fff;
+    --success-color: #5cb85c;
+    --warning-color: #f0ad4e;
+}
+
+.dark-theme {
+    --background-color: #222;
+    --text-color: #f0f0f0;
+    --primary-color: #4477aa;
+    --secondary-color: #2244aa;
+    --content-bg: #1a1a2e;
+    --form-bg: #333;
+    --option-bg: #444;
+    --border-color: #555;
+    --contrast-text: #fff;
+    --contrast-bg: #111;
+    color-scheme: dark;
+}
+
+/* Correção para textos em modo escuro */
+.dark-theme input,
+.dark-theme select,
+.dark-theme textarea,
+.dark-theme option,
+.dark-theme .option-item,
+.dark-theme .option-description,
+.dark-theme .option-card {
+    background-color: var(--form-bg);
+    color: var(--text-color);
+}
+
+.dark-theme .slider {
+    background-color: #555;
+}
+
+.dark-theme .slider:before {
+    background-color: #f0f0f0;
+}
+
+.dark-theme .color-option {
+    border-color: #555;
+}
+
+.dark-theme .option-title {
+    color: var(--primary-color);
+    border-bottom-color: #555;
+}
+
+.high-contrast {
+    --background-color: #000;
+    --text-color: #fff;
+    --primary-color: #fff;
+    --secondary-color: #fff;
+    --content-bg: #000;
+    --form-bg: #000;
+    --option-bg: #000;
+    --border-color: #fff;
+    --contrast-text: #fff;
+    --contrast-bg: #000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-size: var(--font-size-base);
+    transition: background-color 0.3s, color 0.3s, font-size 0.3s;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    border-radius: 5px;
+}
+
+nav {
+    background-color: var(--form-bg);
+    padding: 10px 0;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.content {
+    background-color: var(--content-bg);
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.form-container {
+    background-color: var(--form-bg);
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.form-title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+.option-group {
+    margin-bottom: 20px;
+    background-color: var(--option-bg);
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+}
+
+.option-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--secondary-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 5px;
+}
+
+.option-item {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.option-item label {
+    margin-left: 10px;
+}
+
+/* Estilos para tornar os checkboxes mais acessíveis */
+.option-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.option-item input[type="range"] {
+    width: 100%;
+    max-width: 200px;
+    margin-right: 10px;
+}
+
+.color-selector {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.color-selector span {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: inline-block;
+    border: 2px solid transparent;
+}
+
+.color-selector span.active {
+    border-color: var(--text-color);
+}
+
+.btn-save, .btn-restore {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 3px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto 0;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-restore {
+    background-color: var(--warning-color);
+    margin-top: 10px;
+}
+
+.btn-save:hover {
+    background-color: var(--secondary-color);
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    background-color: var(--success-color);
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    transform: translateX(150%);
+    transition: transform 0.5s;
+    z-index: 1000;
+    max-width: 300px;
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+/* Estilos para acessibilidade */
+.focus-visible:focus {
+    outline: 3px solid orange !important;
+    outline-offset: 3px;
+}
+
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--primary-color);
+    color: white;
+    padding: 8px;
+    z-index: 100;
+    transition: top 0.3s;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+@media (max-width: 768px) {
+    .option-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .option-item label {
+        margin-left: 0;
+        margin-top: 5px;
+    }
+    
+    .notification {
+        max-width: 90%;
+        left: 5%;
+        right: 5%;
+    }
+}
